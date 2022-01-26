@@ -6,3 +6,9 @@ export function dateConverter(dateObj) {
   const result = `${year}-${month}-${day}`;
   return result;
 }
+
+export function clickBoolean(setState) {
+  setState(prev => {
+    return !prev;
+  });
+}
