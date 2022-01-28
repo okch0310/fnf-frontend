@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import VerticalNav from './components/Nav/VerticalNav';
-import Main from './pages/Main';
+import Main from './pages/Main/Main';
 
 export default function Router() {
   return (
