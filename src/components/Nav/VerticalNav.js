@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-import { selectedArea } from '../../atom/area';
-import { useRecoilValue } from 'recoil';
+import { useLocation } from 'react-router-dom';
 
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai';
 
@@ -9,15 +8,15 @@ import styled, { ThemeContext } from 'styled-components';
 
 import VerticalCategoryNav from './VerticalNavContents/VerticalCategoryNav';
 
-const sideComps = {
-  category: <VerticalCategoryNav />,
-  styleRanking: '',
+const SIDE_COMPONENTS = {
+  '/category': <VerticalCategoryNav />,
+  '/styleranking': '',
 };
 
 export default function VerticalNav() {
   const themeContext = useContext(ThemeContext);
+  const location = useLocation();
 
-  const userSelectedArea = useRecoilValue(selectedArea);
   const [isNavActive, setIsNavActive] = useState(false);
 
   const toggleNav = () => {
@@ -34,7 +33,7 @@ export default function VerticalNav() {
       </NavToggleButton>
 
       <NavContainer toggleNav={isNavActive}>
-        {sideComps[userSelectedArea]}
+        {SIDE_COMPONENTS[location.pathname]}
       </NavContainer>
     </NavWrapper>
   );

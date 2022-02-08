@@ -5,6 +5,8 @@ import WithoutNav from './components/NavOutlet/WithoutNav';
 import LandingPage from './pages/LandingPage/LandingPage';
 import Main from './pages/Main/Main';
 
+const MAIN_CONTENTS_PATH = ['/category', '/styleranking'];
+
 export default function Router() {
   return (
     <BrowserRouter>
@@ -13,7 +15,13 @@ export default function Router() {
           <Route path="/" element={<LandingPage />} />
         </Route>
         <Route element={<WithNav />}>
-          <Route path="/dashboard" element={<Main />} />
+          {MAIN_CONTENTS_PATH.map((item, index) => (
+            <Route
+              key={item}
+              path={MAIN_CONTENTS_PATH[index]}
+              element={<Main />}
+            />
+          ))}
         </Route>
       </Routes>
     </BrowserRouter>

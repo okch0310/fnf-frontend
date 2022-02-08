@@ -1,21 +1,22 @@
 import { useState } from 'react';
 
-import { selectedArea } from '../../../../atom/area';
-import { useRecoilValue } from 'recoil';
+import { useLocation } from 'react-router-dom';
+
+const BTN_CLICKED_STATUS = {
+  '/category': {
+    all: true,
+    검색량: false,
+    판매재고: false,
+    유통채널: false,
+    초기화: false,
+  },
+};
 
 export default function useVerticalNavClick() {
-  const userSelectedArea = useRecoilValue(selectedArea);
+  const location = useLocation();
 
   const [isBtnClicked, setIsBtnClicked] = useState(
-    userSelectedArea === 'category'
-      ? {
-          all: true,
-          검색량: false,
-          판매재고: false,
-          유통채널: false,
-          초기화: false,
-        }
-      : {}
+    BTN_CLICKED_STATUS[location.pathname]
   );
 
   const handleBtnClick = e => {
