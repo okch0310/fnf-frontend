@@ -6,11 +6,11 @@ const ChartRange = () => {
   return (
     <ChartRangeContainer>
       <CalendarBlock>
-        <CalendarElement value="startDate" />
+        <CalendarElement value="start-date" />
       </CalendarBlock>
       <CalCoupler> ~ </CalCoupler>
       <CalendarBlock>
-        <CalendarElement value="endDate" />
+        <CalendarElement value="end-date" />
       </CalendarBlock>
     </ChartRangeContainer>
   );

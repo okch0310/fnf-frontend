@@ -1,29 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import { clickBoolean } from '../../utils/Functions';
 import { HorizonNavTri } from '../../styles/icons';
 import ChartRange from '../SearchCondition/Conditions/ChartRange';
 import WeeklyPerformance from '../SearchCondition/Conditions/WeeklyPerformance';
 import CheckOptions from '../SearchCondition/Conditions/CheckOptions';
-import { filterSelect } from '../../atom/filterSelect';
+import SelectButton from '../Buttons/SelectButton';
+
 import { useRecoilState } from 'recoil';
+import { filterSelect } from '../../atom/filterSelect';
+import { staticData } from '../../atom/staticData';
+
+import useMakeQuery from '../../components/Nav/HorizonNavContents/hook/useMakeQuery';
+import {
+  FILTERINFO,
+  API,
+  DATANAME,
+} from '../Nav/HorizonNavContents/contants/api';
 
 const HorizonNav = () => {
   const [showFilterOptions, setShowFilterOptions] = useState(false);
   const [filterOptions, setFilterOptions] = useState({});
   const [selectedFilterOptions] = useRecoilState(filterSelect);
+  const [statData, setStatData] = useRecoilState(staticData);
+  const { queryString } = useMakeQuery();
 
   const showFilter = () => {
     clickBoolean(setShowFilterOptions);
   };
-  // 이 fetch는 navbar에서만 사용
+
   useEffect(() => {
-    fetch('./data/mockData.json')
-      .then(res => res.json())
-      .then(result => {
-        setFilterOptions(result);
-      });
+    axios.get(FILTERINFO).then(result => {
+      setFilterOptions(result.data);
+    });
   }, []);
+
+  const getStatistics = () => {
+    const prevStat = { ...statData };
+
+    API.map((url, idx) => {
+      axios
+        .get(`http://${url}?brand=M&adult-kids=성인&${queryString}`)
+        .then(res => {
+          setStatData(prev => {
+            prevStat[DATANAME[idx]] = res.data;
+            return { ...prevStat };
+          });
+        })
+        .catch(err => console.log(err));
+    });
+    return null;
+  };
 
   return (
     <NavContainer>
@@ -35,7 +63,7 @@ const HorizonNav = () => {
       </NavExpBtnContainer>
       <ShrinkFilter showFilterOptions={showFilterOptions}>
         <ChartRange />
-        <WeeklyPerformance value="weeklyDate" />
+        <WeeklyPerformance value="weekly-date" />
         <ProductType>
           {filterOptions.categories && (
             <CheckOptions
@@ -51,14 +79,16 @@ const HorizonNav = () => {
               }
             />
           )}
+        </ProductType>
+        <SelectSeason>
           {filterOptions.seasons && (
             <CheckOptions
               value="seasons"
               filterOptions={filterOptions.seasons}
             />
           )}
-        </ProductType>
-        <SelectSeason />
+        </SelectSeason>
+        <SelectButton getStatistics={getStatistics} />
       </ShrinkFilter>
     </NavContainer>
   );
