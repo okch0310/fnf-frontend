@@ -49,6 +49,7 @@ const NavWrapper = styled.section`
   transform: ${props =>
     props.isNavActive ? 'translateX(0)' : 'translateX(-6vw)'};
   font-size: 1.2vw;
+  z-index: 3;
 `;
 
 const NavContainer = styled.section`
