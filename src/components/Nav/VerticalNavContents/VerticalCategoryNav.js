@@ -1,23 +1,37 @@
 import { useContext } from 'react';
 import useVerticalNavClick from './hook/useVerticalNavClick';
 
+import { isSideNavActive } from '../../../atom/sideNav';
+import { useRecoilValue } from 'recoil';
+
 import styled, { ThemeContext } from 'styled-components';
+
+import { AiOutlineHome } from 'react-icons/ai';
+import { BsSearch } from 'react-icons/bs';
+import { GiReceiveMoney } from 'react-icons/gi';
+import { FiGlobe } from 'react-icons/fi';
 
 const categoryBtnType = {
   1: 'all',
   2: '검색량',
-  3: '판매재고',
-  4: '유통채널',
-  5: '초기화',
+  3: '주간실적',
+  4: '판매채널',
+};
+
+const categoryBtnTypeIcon = {
+  all: <AiOutlineHome />,
+  검색량: <BsSearch />,
+  주간실적: <GiReceiveMoney />,
+  판매채널: <FiGlobe />,
 };
 
 export default function VerticalCategoryNav() {
   const themeContext = useContext(ThemeContext);
-
   const { isBtnClicked, handleBtnClick } = useVerticalNavClick();
+  const isNavActive = useRecoilValue(isSideNavActive);
 
   return (
-    <>
+    <NavButtonsWrapper>
       {Object.entries(categoryBtnType).map(item => {
         return (
           <NavButton
@@ -25,36 +39,58 @@ export default function VerticalCategoryNav() {
             name={item[1]}
             monoColors={themeContext.monoColors}
             pointColors={themeContext.pointColors}
+            isNavActive={isNavActive}
             isBtnClicked={isBtnClicked[item[1]]}
             onClick={handleBtnClick}
           >
-            {item[1].charAt(0).toUpperCase() + item[1].slice(1)}
+            <NavButtonText>
+              {isNavActive ? (
+                <>
+                  {categoryBtnTypeIcon[item[1]]}
+                  {item[1].charAt(0).toUpperCase() + item[1].slice(1)}
+                </>
+              ) : (
+                categoryBtnTypeIcon[item[1]]
+              )}
+            </NavButtonText>
           </NavButton>
         );
       })}
-    </>
+    </NavButtonsWrapper>
   );
 }
 
-const NavButton = styled.div`
+const NavButtonsWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-basis: 10%;
-  margin: 5px;
-  border-bottom: 0.5px solid ${props => props.monoColors.smokeWhite};
+  flex-direction: column;
+  height: 100%;
+  gap: 2%;
+`;
+
+const NavButton = styled.div`
+  ${props =>
+    props.isNavActive ? `padding-left:15%` : `justify-content:center`};
+  display: flex;
+  align-items: center;\
+  height: 8%;
+  font-size: ${props => (props.isBtnClicked ? '0.95em' : '0.8em')};
+  font-weight: 700;
   border-radius: 5px;
-  background-color: ${props =>
-    props.isBtnClicked ? props.pointColors.lightBlue : props.monoColors.gray};
+  color: ${props => (props.isBtnClicked ? '#fff' : '#b0c8e8')};
 
   &:hover {
-    background-color: ${props =>
-      props.isBtnClicked
-        ? props.pointColors.hoverBlue
-        : props.monoColors.lightGray};
-    color: ${props => (props.isBtnClicked ? '#fff' : '#000')};
+    color: white;
+    font-size: 0.95em;
   }
 
-  word-break: break-all;
+  word-break: keep-all;
+  overflow: hidden;
   cursor: pointer;
+  transition: color 0.4s ease, font-size 0.1s ease;
+`;
+
+const NavButtonText = styled.div`
+  display: flex;
+  gap: 10px;
+  pointer-events: none;
 `;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { selectedSideMenu } from '../../../../../atom/sideMenu';
+import { selectedSideMenu } from '../../../../../atom/sideNav';
 
 export default function useToggleContents() {
   const userSelectedSideMenu = useRecoilValue(selectedSideMenu);

@@ -5,7 +5,7 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 
 export function HorizonNavTri() {
   return (
-    <IconContext.Provider value={{ color: 'white', size: '2em' }}>
+    <IconContext.Provider value={{ color: 'black', size: '2em' }}>
       <CgShapeTriangle />
     </IconContext.Provider>
   );
