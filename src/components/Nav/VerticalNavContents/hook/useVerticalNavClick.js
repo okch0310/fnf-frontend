@@ -2,15 +2,14 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useSetRecoilState } from 'recoil';
-import { selectedSideMenu } from '../../../../atom/sideMenu';
+import { selectedSideMenu } from '../../../../atom/sideNav';
 
 const BTN_CLICKED_STATUS = {
   '/category': {
     all: true,
     검색량: false,
-    판매재고: false,
-    유통채널: false,
-    초기화: false,
+    주간실적: false,
+    판매채널: false,
   },
 };
 
@@ -22,19 +21,6 @@ export default function useVerticalNavClick() {
   );
 
   const setSelectedSideMenu = useSetRecoilState(selectedSideMenu);
-
-  const initBtns = () => {
-    const prevObj = { ...isBtnClicked };
-    const initObj = Object.fromEntries(
-      Object.entries(prevObj).map(item => {
-        const objEach = item;
-        objEach[0] === 'all' ? (objEach[1] = true) : (objEach[1] = false);
-        return objEach;
-      })
-    );
-    setIsBtnClicked(initObj);
-    setSelectedSideMenu('all');
-  };
 
   const updateBtnClicked = name => {
     setIsBtnClicked(current => {
@@ -55,7 +41,7 @@ export default function useVerticalNavClick() {
   const handleBtnClick = e => {
     const name = e.target.getAttribute('name');
 
-    name === '초기화' ? initBtns() : updateBtnClicked(name);
+    updateBtnClicked(name);
   };
 
   return { isBtnClicked, handleBtnClick };

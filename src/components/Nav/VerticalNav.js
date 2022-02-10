@@ -1,8 +1,10 @@
-import React, { useState, useContext } from 'react';
-
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai';
+import { isSideNavActive } from '../../atom/sideNav';
+import { useRecoilState } from 'recoil';
+
+import { FcDownLeft, FcDownRight } from 'react-icons/fc';
 
 import styled, { ThemeContext } from 'styled-components';
 
@@ -17,7 +19,7 @@ export default function VerticalNav() {
   const themeContext = useContext(ThemeContext);
   const location = useLocation();
 
-  const [isNavActive, setIsNavActive] = useState(false);
+  const [isNavActive, setIsNavActive] = useRecoilState(isSideNavActive);
 
   const toggleNav = () => {
     setIsNavActive(!isNavActive);
@@ -28,12 +30,11 @@ export default function VerticalNav() {
       isNavActive={isNavActive}
       backgroundColors={themeContext.backgroundColors}
     >
-      <NavToggleButton onClick={toggleNav} monoColors={themeContext.monoColors}>
-        {isNavActive ? <AiOutlineDoubleLeft /> : <AiOutlineDoubleRight />}
-      </NavToggleButton>
-
       <NavContainer toggleNav={isNavActive}>
-        {SIDE_COMPONENTS[location.pathname]}
+        <NavContents>{SIDE_COMPONENTS[location.pathname]}</NavContents>
+        <NavToggleButton onClick={toggleNav}>
+          {isNavActive ? <FcDownLeft /> : <FcDownRight />}
+        </NavToggleButton>
       </NavContainer>
     </NavWrapper>
   );
@@ -41,13 +42,10 @@ export default function VerticalNav() {
 
 const NavWrapper = styled.section`
   position: fixed;
-  width: 6vw;
+  width: ${props => (props.isNavActive ? '10vw' : '4vw')};
   height: 100vh;
-  padding-top: 5px;
-  background-color: ${props => props.backgroundColors.backColor};
-  transition: transform 0.5s ease-in-out;
-  transform: ${props =>
-    props.isNavActive ? 'translateX(0)' : 'translateX(-6vw)'};
+  background-color: #377ef9;
+  transition: width 0.4s ease-in-out;
   font-size: 1.2vw;
   z-index: 3;
 `;
@@ -56,21 +54,31 @@ const NavContainer = styled.section`
   height: 100%;
   display: flex;
   flex-direction: column;
-  z-index: 500;
+  flex-basis: 50%;
+  padding-top: 30px;
+`;
+
+const NavContents = styled.div`
+  flex-basis: 90%;
 `;
 
 const NavToggleButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  width: 1.8vw;
-  height: 3.6vh;
-  border-radius: 50%;
-  top: 48vh;
-  left: 5.6vw;
-  background-color: ${props => props.monoColors.black};
-  color: #fff;
-  z-index: 501;
+  width: 100%;
+  padding: 10px 0;
   cursor: pointer;
+  &:hover {
+    background: #adadad;
+  }
+
+  svg {
+    polygon {
+      fill: white;
+    }
+    path {
+      fill: white;
+    }
+  }
 `;

@@ -4,9 +4,8 @@ import useToggleContents from './hook/useToggleContents';
 const SELECTED_COMPONENTS = {
   all: 'all',
   검색량: 'search',
-  판매재고: 'inventory',
-  유통채널: 'channel',
-  초기화: 'init',
+  주간실적: 'inventory',
+  판매채널: 'channel',
 };
 
 export default function Category() {

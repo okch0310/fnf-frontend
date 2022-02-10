@@ -13,8 +13,6 @@ const HorizonNav = () => {
   const [filterOptions, setFilterOptions] = useState({});
   const [selectedFilterOptions] = useRecoilState(filterSelect);
 
-  console.log(selectedFilterOptions);
-
   const showFilter = () => {
     clickBoolean(setShowFilterOptions);
   };
@@ -69,15 +67,8 @@ const HorizonNav = () => {
 const NavContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 30px;
-  margin-left: 5px;
-  margin-right: 5px;
   padding-left: 5px;
   padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 10px;
-  background-color: ${props => props.theme.pointColors.red};
 `;
 
 const NavExpBtnContainer = styled.div`
@@ -108,9 +99,9 @@ const ShrinkFilter = styled.div`
     left: 0;
     display: inline-block;
     vertical-align: middle;
-    box-shadow: 0 0 5px #8e0505;
+
     border-radius: 10px;
-    background-color: ${props => props.theme.pointColors.red};
+    background-color: #377ef9;
     transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
     transition: transform 1s;
     transform-origin: right;

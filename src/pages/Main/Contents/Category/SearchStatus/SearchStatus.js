@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentCard from '../../components/ContentCard/ContentCard';
+import ContentCard from '../../../../../components/ContentCard/ContentCard';
 import SearchDataTable from './SearchDataTable';
 import SearchDataChart from './SearchDataChart';
 import SearchDataSmallChart from './SearchDataSmallChart';
