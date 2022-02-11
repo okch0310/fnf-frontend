@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import useToggleContents from './hook/useToggleContents';
+import { isDataLoaded } from '../../../../atom/staticData';
+import { useRecoilValue } from 'recoil';
+
 import SalesInventory from './SalesInventoryStatus/SalesInventory';
 
 const SELECTED_COMPONENTS = {
@@ -12,13 +15,16 @@ const SELECTED_COMPONENTS = {
 export default function Category() {
   const { toggleContents, userSelectedSideMenu } = useToggleContents();
 
+  const dataLoaded = useRecoilValue(isDataLoaded);
+
   return (
     <CategoryWrapper toggleContents={toggleContents}>
-      {SELECTED_COMPONENTS[userSelectedSideMenu]}
+      {dataLoaded
+        ? SELECTED_COMPONENTS[userSelectedSideMenu]
+        : '검색 버튼을 눌러 데이터를 받아오면 동작합니다.'}
     </CategoryWrapper>
   );
 }
-
 const CategoryWrapper = styled.section`
   display: flex;
   justify-content: center;

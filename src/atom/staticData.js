@@ -21,3 +21,8 @@ export const staticData = atom({
     salesWeeklySummary: null,
   },
 });
+
+export const isDataLoaded = atom({
+  key: 'isDataLoaded',
+  default: false,
+});
