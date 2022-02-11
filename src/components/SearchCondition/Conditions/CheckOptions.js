@@ -5,11 +5,30 @@ import CheckElement from './CheckElement/CheckElement';
 import { useRecoilState } from 'recoil';
 import { filterSelect } from '../../../atom/filterSelect';
 
+const VALUE_OBJ_KOR = {
+  categories: '카테고리',
+  subcategories: '서브카테고리',
+  seasons: '시즌별',
+};
+
 const CheckOptions = ({ filterOptions, value }) => {
   const [selectedFilterOptions, setSelectedFilterOptions] =
     useRecoilState(filterSelect);
   const [expand, setExpand] = useState(false);
   const [allChecked, setAllChecked] = useState(false);
+
+  const VALUE_OBJ = {
+    categories: selectedFilterOptions.categories,
+    subcategories: Array.from(selectedFilterOptions.subcategories).reduce(
+      (acc, cur) => {
+        return acc + cur + ',';
+      },
+      ''
+    ),
+    seasons: Array.from(selectedFilterOptions.seasons).reduce((acc, cur) => {
+      return acc + cur + ',';
+    }, ''),
+  };
 
   useEffect(() => {
     if (value !== 'categories') {
@@ -21,7 +40,7 @@ const CheckOptions = ({ filterOptions, value }) => {
         }
       }
     }
-  }, [selectedFilterOptions]);
+  }, [filterOptions, selectedFilterOptions, value]);
 
   const allCheckEvent = () => {
     const prevState = { ...selectedFilterOptions };
@@ -34,7 +53,7 @@ const CheckOptions = ({ filterOptions, value }) => {
     } else {
       setAllChecked(true);
       setSelectedFilterOptions(() => {
-        filterOptions.map(element => {
+        filterOptions.forEach(element => {
           prevState[value].add(element);
         });
         return { ...prevState };
@@ -47,9 +66,11 @@ const CheckOptions = ({ filterOptions, value }) => {
   };
 
   return (
-    <MultiSelector>
+    <MultiSelector value={value}>
       <SelectField onClick={showOptions}>
-        <span>클릭확장</span>
+        <span>
+          {VALUE_OBJ[value] === '' ? VALUE_OBJ_KOR[value] : VALUE_OBJ[value]}
+        </span>
         <DropDownImg expand={expand} />
       </SelectField>
       <OptionList expand={expand}>
@@ -94,12 +115,13 @@ const Section = styled.section``;
 
 const MultiSelector = styled.div`
   position: relative;
-  width: max-content;
+  width: ${props => (props.value === 'subcategories' ? '120px' : '100px')};
   height: 27px;
 `;
 
 const SelectField = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   border: 1px solid #aeaeae;
   border-radius: 4px;
