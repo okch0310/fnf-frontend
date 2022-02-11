@@ -100,6 +100,5 @@ export default function SalesInventoryChart() {
 }
 
 const ChartWrapper = styled.section`
-  width: 100vw;
   height: 25vh;
 `;

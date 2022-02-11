@@ -48,7 +48,7 @@ const HorizonNav = () => {
             return { ...prevStat };
           });
         })
-        .catch(err => console.log(err));
+        .catch(err => alert(err));
     });
     return null;
   };

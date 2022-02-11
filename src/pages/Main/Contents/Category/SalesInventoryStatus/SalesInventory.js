@@ -4,16 +4,21 @@ import ContentCard from '../../../../../components/ContentCard/ContentCard';
 import SalesInventoryTable from './SalesInventoryTable';
 import SalesPerformanceTable from './SalesPerformanceTable';
 import SalesPerformanceSeasonTable from './SalesPerformanceSeasonTable';
+import styled from 'styled-components';
 
-function SalesInventory() {
+export default function SalesInventory() {
   return (
-    <>
+    <InventoryWrapper>
       <ContentCard children={<SalesInventoryChart />} />
       <ContentCard children={<SalesInventoryTable />} />
       <ContentCard children={<SalesPerformanceTable />} />
       <ContentCard children={<SalesPerformanceSeasonTable />} />
-    </>
+    </InventoryWrapper>
   );
 }
 
-export default SalesInventory;
+const InventoryWrapper = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
