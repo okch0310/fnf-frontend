@@ -122,7 +122,7 @@ export default function SearchCompetitorChart() {
   return (
     <ChartWrapper>
       <ChartTitle>경쟁사 검색어 추이</ChartTitle>
-      <ResponsiveContainer width="100%" height="100%" aspect={2.8 / 1}>
+      <ResponsiveContainer width="100%" height="90%">
         <ComposedChart
           data={data}
           margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
@@ -187,7 +187,7 @@ export default function SearchCompetitorChart() {
 
 const ChartWrapper = styled.div`
   width: 61.2vw;
-  height: 40.8vh;
+  height: 100%;
   padding: 20px;
 `;
 

@@ -308,11 +308,11 @@ export default function SearchNormalChart() {
     <ChartWrapper>
       <ChartTitle>일반 검색어</ChartTitle>
       {normalChart && (
-        <ResponsiveContainer width="100%" height="100%" aspect={1.3 / 1}>
+        <ResponsiveContainer width="100%" height="90%">
           <LineChart
             data={normalChart}
             margin={{
-              top: 5,
+              top: 10,
               right: 30,
               left: 20,
               bottom: 5,
@@ -340,13 +340,12 @@ export default function SearchNormalChart() {
               iconType="plainline"
               align="left"
               wrapperStyle={{
-                left: 5,
-                paddingBottom: 30,
+                left: 0,
+                top: 0,
                 fontSize: 12,
               }}
             />
             <Tooltip />
-            <Legend />
             {PERIOD.map(item => (
               <Line
                 key=""
@@ -366,7 +365,7 @@ export default function SearchNormalChart() {
 
 const ChartWrapper = styled.div`
   width: 29.2vw;
-  height: 40.8vh;
+  height: 100%;
   padding: 20px;
 `;
 

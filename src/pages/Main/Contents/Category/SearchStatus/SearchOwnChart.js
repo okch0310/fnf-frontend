@@ -308,12 +308,11 @@ export default function SearchOwnChart() {
     <ChartWrapper>
       <ChartTitle>MLB 검색어</ChartTitle>
       {ownChartData && (
-        <ResponsiveContainer width="100%" height="100%" aspect={1.3 / 1}>
+        <ResponsiveContainer width="100%" height="90%">
           <LineChart
             data={ownChartData}
             margin={{
-              top: 5,
-              right: 30,
+              top: 10,
               left: 20,
               bottom: 5,
             }}
@@ -340,13 +339,12 @@ export default function SearchOwnChart() {
               iconType="plainline"
               align="left"
               wrapperStyle={{
-                left: 5,
-                paddingBottom: 30,
+                left: 0,
+                top: -10,
                 fontSize: 12,
               }}
             />
             <Tooltip />
-            <Legend />
             {PERIOD.map(item => (
               <Line
                 key=""
@@ -366,7 +364,7 @@ export default function SearchOwnChart() {
 
 const ChartWrapper = styled.div`
   width: 29.2vw;
-  height: 40.8vh;
+  height: 100%;
   padding: 20px;
 `;
 

@@ -103,4 +103,5 @@ export default function UserTable() {
 
 const TableWrapper = styled.section`
   text-align: center;
+  overflow-y: auto;
 `;

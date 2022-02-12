@@ -99,7 +99,7 @@ export default function SearchWeeklyTable() {
       autoHideTimeout={500}
       autoHide
       autoHeight
-      autoHeightMin={`${40.8}vh`}
+      autoHeightMin={`${42}vh`}
     >
       <TableWrapper>
         <TableTitle>주간</TableTitle>
@@ -136,11 +136,10 @@ export default function SearchWeeklyTable() {
 
 const TableWrapper = styled.div`
   width: 30vw;
-  height: 40.8vh;
-  padding: 20px 0 20px 20px;
+  padding: 10px 0 10px 10px;
 `;
 
 const TableTitle = styled.div`
-  padding: 0 0 20px 0;
+  padding: 0 0 10px 10px;
   font-size: 18px;
 `;

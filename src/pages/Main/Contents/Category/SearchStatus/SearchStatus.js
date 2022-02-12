@@ -33,41 +33,41 @@ export default function SearchStatus() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  padding: 4vh 2vw 2vh 2vw;
-  gap: 2vw;
-  background-color: #efefef;
+  width: 100%;
+  height: 100%;
+  gap: 1vw;
 `;
 
 const SearchDataTitle = styled.div`
+  height: 5.2vh;
   font-size: 36px;
 `;
 
 const SearchDataViews = styled.div`
   display: flex;
+  height: 90vh;
   gap: 2vw;
 `;
 
 const TableWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 32vw;
   gap: 2vh;
 `;
 
 const ChartWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 62vw;
   gap: 2vh;
 `;
 
 const NormalOwnChartWrapper = styled.div`
   display: flex;
+  height: 48%;
   gap: 2vw;
 `;
 
 const CompetitorChartWrapper = styled.div`
   display: flex;
+  height: 45%;
 `;

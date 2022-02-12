@@ -152,5 +152,9 @@ export default function UserTable() {
 }
 
 const TableWrapper = styled.section`
+  @media only screen and (max-width: 1600px) {
+    height: 25vh;
+  }
   text-align: center;
+  overflow-y: auto;
 `;

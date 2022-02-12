@@ -106,10 +106,11 @@ const NavContainer = styled.div`
   align-items: center;
   padding-left: 5px;
   padding-right: 10px;
+  background-color: #eeeeee;
+  height: 4.8vh;
 `;
 
 const NavExpBtnContainer = styled.div`
-  padding-bottom: 2px;
   margin-right: 5px;
   cursor: pointer;
   transition: transform 1.5s;
