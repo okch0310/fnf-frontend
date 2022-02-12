@@ -341,7 +341,7 @@ export default function SearchNormalChart() {
               align="left"
               wrapperStyle={{
                 left: 0,
-                top: 0,
+                top: -10,
                 fontSize: 12,
               }}
             />

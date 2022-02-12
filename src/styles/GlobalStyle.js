@@ -15,6 +15,7 @@ html, body {
   height: 100vh;
   overflow: hidden;
   font-family: 'Noto Sans KR', sans-serif;
+  background-color:#efefef;
 }
 
 a {

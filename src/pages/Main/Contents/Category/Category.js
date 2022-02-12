@@ -5,9 +5,10 @@ import { useRecoilValue } from 'recoil';
 
 import SearchStatus from './SearchStatus/SearchStatus';
 import SalesInventory from './SalesInventoryStatus/SalesInventory';
+import AllCategoryData from './AllCategoryArea/AllCategoryArea';
 
 const SELECTED_COMPONENTS = {
-  all: 'all',
+  all: <AllCategoryData />,
   검색량: <SearchStatus />,
   주간실적: <SalesInventory />,
   판매채널: 'channel',
@@ -35,5 +36,4 @@ const CategoryWrapper = styled.section`
   padding: 0 10px;
   opacity: ${props => (props.toggleContents ? 0 : 1)};
   transition: ${props => (props.toggleContents ? '' : 'opacity 0.1s ease')};
-  background-color: #efefef;
 `;

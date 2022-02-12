@@ -6,11 +6,12 @@ import SearchCompetitorChart from './SearchCompetitorChart';
 import SearchNormalChart from './SearchNormalChart';
 import SearchOwnChart from './SearchOwnChart';
 import styled from 'styled-components';
+import PageTitle from '../../../../../components/PageTitle/PageTitle';
 
 export default function SearchStatus() {
   return (
     <Wrapper>
-      <SearchDataTitle>마켓검색량</SearchDataTitle>
+      <PageTitle title="마켓검색량" />
       <SearchDataViews>
         <TableWrapper>
           <ContentCard children={<SearchWeeklyTable />} />
@@ -36,11 +37,6 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   gap: 1vw;
-`;
-
-const SearchDataTitle = styled.div`
-  height: 5.2vh;
-  font-size: 36px;
 `;
 
 const SearchDataViews = styled.div`
