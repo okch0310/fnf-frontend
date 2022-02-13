@@ -9,10 +9,19 @@ import styled from 'styled-components';
 export default function SalesInventory() {
   return (
     <InventoryWrapper>
-      <ContentCard children={<SalesInventoryChart />} />
-      <ContentCard children={<SalesInventoryTable />} />
-      <ContentCard children={<SalesPerformanceTable />} />
-      <ContentCard children={<SalesPerformanceSeasonTable />} />
+      <InventoryEach>
+        <ContentCard children={<SalesInventoryChart />} />
+      </InventoryEach>
+      <InventoryEach>
+        <ContentCard children={<SalesInventoryTable />} />
+      </InventoryEach>
+      <InventoryEach>
+        <ContentCard children={<SalesPerformanceTable />} />
+      </InventoryEach>
+
+      <InventoryEach>
+        <ContentCard children={<SalesPerformanceSeasonTable />} />
+      </InventoryEach>
     </InventoryWrapper>
   );
 }
@@ -22,4 +31,9 @@ const InventoryWrapper = styled.section`
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 1px;
+`;
+
+const InventoryEach = styled.div`
+  height: 24%;
 `;
