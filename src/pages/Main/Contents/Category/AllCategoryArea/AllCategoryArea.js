@@ -29,10 +29,10 @@ export default function AllCategoryData() {
       <EachPageView>
         {Object.entries(CATEGORY_EACH_PAGES).map((item, index) => (
           <EachPageWrapper key={item[0]}>
-            <EachPageTitle>{item[0]}</EachPageTitle>
-            <EachPageContents name={item[0]} onClick={handleSelectedArea}>
-              {item[1]}
-            </EachPageContents>
+            <EachPageTitle name={item[0]} onClick={handleSelectedArea}>
+              {item[0]}
+            </EachPageTitle>
+            <EachPageContents>{item[1]}</EachPageContents>
           </EachPageWrapper>
         ))}
       </EachPageView>
@@ -55,15 +55,20 @@ const EachPageView = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  margin-top: 10px;
 `;
 
 const EachPageTitle = styled.p`
   width: 100%;
   text-align: center;
+  font-size: 1.1em;
+  font-weight: 700;
+  cursor: pointer;
 `;
 const EachPageContents = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
   padding: 10px;
 `;

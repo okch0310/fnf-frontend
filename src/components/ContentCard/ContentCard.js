@@ -8,6 +8,8 @@ export default function ContentCard({ children }) {
 }
 
 const Card = styled.div`
+  width: 100%;
+  height: 100%;
   padding: 5px;
   border-radius: 7px;
   box-shadow: 1px 1px 10px ${props => props.theme.cardColors.borderSmoke};
