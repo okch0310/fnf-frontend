@@ -7,7 +7,7 @@ export default function ContentCard({ children }) {
   return <Card>{children}</Card>;
 }
 
-const Card = styled.div`
+export const Card = styled.div`
   width: 100%;
   height: 100%;
   padding: 5px;
