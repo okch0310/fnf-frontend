@@ -13,8 +13,14 @@ export default function SearchCharts({ selfComp, data }) {
     <>
       {!isZoomInClicked && <ContentZoomIn name={selfComp} />}
       <SearchEachChartWrapper>
-        <SearchEachChart chartName="일반" data={data.NormalChartData} />
-        <SearchEachChart chartName="MLB" data={data.OwnChartData} />
+        <SearchEachChart
+          chartName="일반"
+          data={data.searchCountTimeseriesOverall.data}
+        />
+        <SearchEachChart
+          chartName="MLB"
+          data={data.searchCountTimeseriesBrand.data}
+        />
       </SearchEachChartWrapper>
     </>
   );
@@ -23,5 +29,5 @@ export default function SearchCharts({ selfComp, data }) {
 const SearchEachChartWrapper = styled.div`
   display: flex;
   height: 100%;
-  padding: 10px;
+  padding-top: 2vh;
 `;

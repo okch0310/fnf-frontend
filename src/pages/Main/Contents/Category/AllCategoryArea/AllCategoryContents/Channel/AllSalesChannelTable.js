@@ -6,8 +6,6 @@ import { CustomCell } from './Inventory/RepeatCell';
 import { Card } from '../../../../../../../components/ContentCard/ContentCard';
 import ContentZoomIn from '../../../../../../../components/ContentToggle/ContentZoomIn';
 
-import { dataStringFormatter } from '../../../../../../../utils/Functions';
-
 import {
   Table,
   TableBody,
@@ -17,6 +15,14 @@ import {
   Paper,
 } from '@material-ui/core';
 import Scrollbars from 'react-custom-scrollbars';
+
+const KEYVALUE = {
+  cls: '항목',
+  ratio: '비중',
+  qty_cy: '판매량 (당해)',
+  qty_py: '판매량 (전년)',
+  growth: '전년비',
+};
 
 export default function AllSalesChannelTable({ selfComp, onlyTable, data }) {
   const { isZoomInClicked } = useContext(AllCategoryContext);
@@ -42,7 +48,7 @@ export default function AllSalesChannelTable({ selfComp, onlyTable, data }) {
                           align="center"
                           key={idx}
                         >
-                          {key}
+                          {KEYVALUE[key]}
                         </CustomCell>
                       );
                     })}
@@ -68,7 +74,7 @@ export default function AllSalesChannelTable({ selfComp, onlyTable, data }) {
                             } else {
                               return (
                                 <CustomCell align="center" key={idx2}>
-                                  {dataStringFormatter(value)}
+                                  {value}
                                 </CustomCell>
                               );
                             }

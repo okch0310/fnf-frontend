@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-export default function SelectButton({ getStatistics }) {
+export default function SelectButton({ click }) {
   const themeContext = useContext(ThemeContext);
-
   return (
     <Buttons
-      onClick={getStatistics}
+      onClick={click}
       monoColors={themeContext.monoColors}
       cardColors={themeContext.cardColors}
       pointColors={themeContext.pointColors}

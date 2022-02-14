@@ -42,6 +42,7 @@ export default function AllCategoryData() {
             <EachPageWrapper key={item[0]}>
               <EachPageTitle name={item[0]} onClick={handleSelectedArea}>
                 {item[0]}
+                {item[0] === '판매채널' && '(유통)'}
               </EachPageTitle>
               <EachPageContents>{item[1]}</EachPageContents>
             </EachPageWrapper>

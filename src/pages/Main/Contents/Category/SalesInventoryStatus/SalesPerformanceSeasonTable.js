@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { dataStringFormatter } from '../../../../../utils/Functions';
+
 import {
   Table,
   TableBody,
@@ -77,20 +79,36 @@ export default function UserTable({ data }) {
           {data.map(item => (
             <TableRow key={item.term_cls}>
               <TableCell align="center">{item.term_cls}</TableCell>
-              <TableCell align="center">{item.indc_qty}</TableCell>
-              <TableCell align="center">{item.ac_stor_qty_kor}</TableCell>
-              <TableCell align="center">{item.sale_qty_kor}</TableCell>
-              <TableCell align="center">{item.ac_sale_qty_kor}</TableCell>
-              <TableCell align="center">{item.stock_qty}</TableCell>
-              <TableCell align="center">{item.sales_rate}</TableCell>
               <TableCell align="center">
-                {item.ac_stor_qty_kor_season_end}
+                {dataStringFormatter(item.indc_qty)}
               </TableCell>
               <TableCell align="center">
-                {item.ac_sale_qty_kor_season_end}
+                {dataStringFormatter(item.ac_stor_qty_kor)}
               </TableCell>
-              <TableCell align="center">{item.stock_qty_season_end}</TableCell>
-              <TableCell align="center">{item.season_end_sales_rate}</TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.sale_qty_kor)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.ac_sale_qty_kor)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.stock_qty)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.sales_rate)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.ac_stor_qty_kor_season_end)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.ac_sale_qty_kor_season_end)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.stock_qty_season_end)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.season_end_sales_rate)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -100,7 +118,7 @@ export default function UserTable({ data }) {
 }
 
 const TableWrapper = styled.section`
-  height: 46vh;
+  height: 45vh;
   text-align: center;
   overflow-y: auto;
   word-break: keep-all;

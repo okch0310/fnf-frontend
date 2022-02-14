@@ -43,14 +43,20 @@ export default function SalesChannelTable({ onlyTable, data }) {
                       Object.values(dataObj).map((value, idx2) => {
                         if (typeof value === 'string') {
                           return value.includes('http') ? (
-                            <CustomCell key={idx2}>
+                            <CustomCell key={idx2} align="center">
                               <ProductImg src={value} alt="Product" />
                             </CustomCell>
                           ) : (
-                            <CustomCell key={idx2}>{value}</CustomCell>
+                            <CustomCell key={idx2} align="center">
+                              {value}
+                            </CustomCell>
                           );
                         } else {
-                          return <CustomCell key={idx2}>{value}</CustomCell>;
+                          return (
+                            <CustomCell key={idx2} align="center">
+                              {value}
+                            </CustomCell>
+                          );
                         }
                       })}
                   </TableRow>
@@ -68,7 +74,7 @@ const ProductImg = styled.img`
   width: 40px;
 `;
 const CustomCard = styled(Card)`
-  ${props => (props.onlyTable ? `width: 85vw` : `width: 40vw`)};
+  ${props => (props.onlyTable ? `width: 85vw` : `width: 41vw`)};
   /* width: ${props => {
     return props.onlyTable ? '85vw' : '40vw';
   }}; */

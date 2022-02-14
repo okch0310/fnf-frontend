@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -116,11 +116,28 @@ import {
 // ];
 
 export default function SalesInventoryChart({ data }) {
+  const [chartData, setChartData] = useState([]);
+
+  useEffect(() => {
+    setChartData(
+      data.map(item => {
+        const newItem = {};
+        newItem['판매량 당해'] = item.sale_qty_kor_ttl;
+        newItem['판매량 전년'] = item.sale_qty_kor_ttl_py;
+        newItem['판매량 2년전'] = item.sale_qty_kor_ttl_py2;
+        newItem['검색량 당해'] = item.search_qty_cy;
+        newItem['검색량 전년'] = item.search_qty_py;
+        return newItem;
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <ChartWrapper>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
-          data={data}
+          data={chartData}
           margin={{
             top: 20,
             right: 0,
@@ -129,25 +146,25 @@ export default function SalesInventoryChart({ data }) {
           }}
         >
           <CartesianGrid stroke="#f5f5f5" />
-          <XAxis dataKey="end_dt" interval={0} fontSize={10} />
-          <YAxis />
-          <YAxis yAxisId="right" orientation="right" />
+          <XAxis dataKey="end_dt" fontSize={10} />
+          <YAxis domain={[-50, 'dataMax']} />
+          <YAxis
+            yAxisId="right"
+            orientation="right"
+            domain={[-50, 'dataMax']}
+          />
           <Tooltip />
           <Legend />
-          <Bar dataKey="search_qty_cy" barSize={20} fill="#EBCAC7" />
+          <Bar dataKey="검색량 당해" barSize={20} fill="#EBCAC7" />
           <Bar
-            dataKey="search_qty_py"
+            dataKey="검색량 전년"
             yAxisId="right"
             barSize={20}
             fill="#CADBE5"
           />
-          <Line type="monotone" dataKey="sale_qty_kor_ttl" stroke="#E1C1E5" />
-          <Line
-            type="monotone"
-            dataKey="sale_qty_kor_ttl_py"
-            stroke="#CCEEFF"
-          />
-          <Line type="monotone" dataKey="sale_qty_kor_ttl_py2" stroke="grey" />
+          <Line type="monotone" dataKey="판매량 당해" stroke="#E1C1E5" />
+          <Line type="monotone" dataKey="판매량 전년" stroke="#CCEEFF" />
+          <Line type="monotone" dataKey="판매량 2년전" stroke="grey" />
         </ComposedChart>
       </ResponsiveContainer>
     </ChartWrapper>

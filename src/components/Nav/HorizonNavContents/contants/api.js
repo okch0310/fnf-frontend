@@ -1,25 +1,25 @@
-export const FILTERINFO = [
-  'http://172.1.7.104:8080/category-list?brand=M&adult-kids=성인',
-];
+const BASE_URL = 'http://172.1.7.142:8000';
+
+export const FILTERINFO = [`${BASE_URL}/category-list?brand=M&adult-kids=성인`];
 
 export const API = [
-  '172.1.7.104:8080/weekly/channel/timeseries',
-  '172.1.7.104:8080/weekly/domain/timeseries',
-  '172.1.7.104:8080/weekly/domain/table',
-  '172.1.7.104:8080/weekly/style/table',
-  '172.1.7.104:8080/weekly/subcategory/table',
-  '172.1.7.104:8080/weekly/channel/timeseries',
-  '172.1.7.104:8080/weekly/channel/table',
-  '172.1.7.104:8080/weekly/distribution/timeseries',
-  '172.1.7.104:8080/weekly/distribution/table',
-  '172.1.7.104:8080/search/table/weekly',
-  '172.1.7.104:8080/search/table/selected-period',
-  '172.1.7.104:8080/search/timeseries/overall',
-  '172.1.7.104:8080/search/timeseries/brand',
-  '172.1.7.104:8080/search/timeseries/competitors',
-  '172.1.7.104:8080/summary/sales-summary-acc',
-  '172.1.7.104:8080/summary/sales-summary-acc-season',
-  '172.1.7.104:8080/summary/weekly-sales-summary',
+  `${BASE_URL}/weekly/channel/timeseries`,
+  `${BASE_URL}/weekly/domain/timeseries`,
+  `${BASE_URL}/weekly/domain/table`,
+  `${BASE_URL}/weekly/style/table`,
+  `${BASE_URL}/weekly/subcategory/table`,
+  `${BASE_URL}/weekly/channel/timeseries`,
+  `${BASE_URL}/weekly/channel/table`,
+  `${BASE_URL}/weekly/distribution/timeseries`,
+  `${BASE_URL}/weekly/distribution/table`,
+  `${BASE_URL}/search/table/weekly`,
+  `${BASE_URL}/search/table/selected-period`,
+  `${BASE_URL}/search/timeseries/overall`,
+  `${BASE_URL}/search/timeseries/brand`,
+  `${BASE_URL}/search/timeseries/competitors`,
+  `${BASE_URL}/summary/sales-summary-acc`,
+  `${BASE_URL}/summary/sales-summary-acc-season`,
+  `${BASE_URL}/summary/weekly-sales-summary`,
 ];
 
 export const DATANAME = [
