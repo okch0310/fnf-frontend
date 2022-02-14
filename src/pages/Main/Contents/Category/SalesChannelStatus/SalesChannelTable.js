@@ -26,7 +26,7 @@ export default function SalesChannelTable({ onlyTable, staticData }) {
             <TableRow>
               {Object.keys(staticData[0]).map((key, idx) => {
                 return (
-                  <CustomCell className="headCell" align="left" key={idx}>
+                  <CustomCell className="headCell" align="center" key={idx}>
                     {key}
                   </CustomCell>
                 );
@@ -41,14 +41,20 @@ export default function SalesChannelTable({ onlyTable, staticData }) {
                     {Object.values(dataObj).map((value, idx2) => {
                       if (typeof value === 'string') {
                         return value.includes('http') ? (
-                          <CustomCell key={idx2}>
+                          <CustomCell key={idx2} align="center">
                             <ProductImg src={value} alt="Product" />
                           </CustomCell>
                         ) : (
-                          <CustomCell key={idx2}>{value}</CustomCell>
+                          <CustomCell key={idx2} align="center">
+                            {value}
+                          </CustomCell>
                         );
                       } else {
-                        return <CustomCell key={idx2}>{value}</CustomCell>;
+                        return (
+                          <CustomCell key={idx2} align="center">
+                            {value}
+                          </CustomCell>
+                        );
                       }
                     })}
                   </TableRow>
