@@ -13,14 +13,8 @@ export default function SearchCharts({ selfComp, data }) {
     <>
       {!isZoomInClicked && <ContentZoomIn name={selfComp} />}
       <SearchEachChartWrapper>
-        <SearchEachChart
-          chartName="일반"
-          data={data.searchCountTimeseriesBrand.data}
-        />
-        <SearchEachChart
-          chartName="MLB"
-          data={data.searchCountTimeseriesOverall.data}
-        />
+        <SearchEachChart chartName="일반" data={data.NormalChartData} />
+        <SearchEachChart chartName="MLB" data={data.OwnChartData} />
       </SearchEachChartWrapper>
     </>
   );

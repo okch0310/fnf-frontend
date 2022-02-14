@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { TableCell } from '@material-ui/core';
+import { dataStringFormatter } from '../../../../../../../../utils/Functions';
 
 export default function RepeatedTableCells({ item }) {
   const itemArray = [
@@ -17,7 +18,7 @@ export default function RepeatedTableCells({ item }) {
     <>
       {itemArray.map(item => (
         <CustomTableCell key={item} align="center">
-          {item}
+          {dataStringFormatter(item)}
         </CustomTableCell>
       ))}
     </>

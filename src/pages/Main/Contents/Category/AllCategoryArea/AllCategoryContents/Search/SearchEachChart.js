@@ -140,7 +140,7 @@ export default function SearchEachChart({ chartName, data }) {
 }
 
 const ChartWrapper = styled.div`
-  width: 100%;
+  width: 12vw;
   height: 100%;
 `;
 

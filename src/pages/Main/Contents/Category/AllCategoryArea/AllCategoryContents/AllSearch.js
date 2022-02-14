@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import SearchCharts from './Search/SearchCharts';
-import SearchCompetitorChart from './Search/SearchCompetitorChart';
+import AllSearchCompetitorChart from './Search/AllSearchCompetitorChart';
 import { useContext } from 'react';
 import { AllCategoryContext } from '../AllCategoryArea';
 
@@ -21,8 +21,8 @@ export default function AllSearch() {
       <SearchCompetitorWrapper isZoomInClicked={isZoomInClicked}>
         <ContentCard
           children={
-            <SearchCompetitorChart
-              selfComp={<SearchCompetitorChart data={competitorChartData} />}
+            <AllSearchCompetitorChart
+              selfComp={<AllSearchCompetitorChart data={competitorChartData} />}
               data={competitorChartData}
             />
           }

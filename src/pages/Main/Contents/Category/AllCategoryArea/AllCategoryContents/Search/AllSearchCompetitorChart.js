@@ -25,7 +25,7 @@ const BRAND_NAME = [
   { name: '프라다', stroke: '#67a8a6' },
 ];
 
-export default function SearchCompetitorChart({ selfComp, data }) {
+export default function AllSearchCompetitorChart({ selfComp, data }) {
   const { isZoomInClicked } = useContext(AllCategoryContext);
 
   const CustomTooltip = ({ active, payload, label }) => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import axios from 'axios';
 import { convertKey } from '../../../../../utils/Functions';
 
 import { keyValue } from './constants/key';
@@ -35,8 +34,6 @@ export default function SalesChannelStatus() {
   // }, []); // 의존성 배열은 전역상태로 변경하기
   useEffect(() => {
     let temp = convertKey(fullData, keyValue);
-    console.log(fullData);
-    console.log(convertKey(fullData, keyValue));
     setData({ ...temp });
   }, [fullData]); // 의존성 배열은 전역상태로 변경하기
 

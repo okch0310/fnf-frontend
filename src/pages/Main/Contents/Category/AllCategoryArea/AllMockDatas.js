@@ -994,6 +994,124 @@ const InventorySummaryData = [
   },
 ];
 
+const ChannelChart = [
+  {
+    end_date: '21.12.26',
+    대리점: 2,
+    면세점: 0,
+    백화점: 0,
+    온라인: 0,
+    직영점: 0,
+  },
+  {
+    end_date: '22.01.02',
+    대리점: 7,
+    면세점: 155,
+    백화점: 19,
+    온라인: 2,
+    직영점: 8,
+  },
+  {
+    end_date: '22.01.09',
+    대리점: 69,
+    면세점: 798,
+    백화점: 116,
+    온라인: 61,
+    직영점: 32,
+  },
+  {
+    end_date: '22.01.16',
+    대리점: 95,
+    면세점: 789,
+    백화점: 263,
+    온라인: 54,
+    직영점: 54,
+  },
+  {
+    end_date: '22.01.23',
+    대리점: 130,
+    면세점: 1005,
+    백화점: 403,
+    온라인: 82,
+    직영점: 83,
+  },
+  {
+    end_date: '22.01.30',
+    대리점: 199,
+    면세점: 1223,
+    백화점: 437,
+    온라인: 300,
+    직영점: 99,
+  },
+  {
+    end_date: '22.02.06',
+    대리점: 302,
+    면세점: 1139,
+    백화점: 414,
+    온라인: 56,
+    직영점: 119,
+  },
+];
+
+const ChannelTable = [
+  {
+    cls: 'Total',
+    ratio: 100,
+    qty_cy: 2030,
+    qty_py: 1097,
+    growth: 185,
+  },
+  {
+    cls: '면세점',
+    ratio: 62,
+    qty_cy: 1139,
+    qty_py: 239,
+    growth: 477,
+  },
+  {
+    cls: '백화점',
+    ratio: 18,
+    qty_cy: 414,
+    qty_py: 468,
+    growth: 88,
+  },
+  {
+    cls: '대리점',
+    ratio: 12,
+    qty_cy: 302,
+    qty_py: 163,
+    growth: 185,
+  },
+  {
+    cls: '직영점',
+    ratio: 5,
+    qty_cy: 119,
+    qty_py: 58,
+    growth: 205,
+  },
+  {
+    cls: '온라인',
+    ratio: 2,
+    qty_cy: 56,
+    qty_py: 169,
+    growth: 33,
+  },
+  {
+    cls: '샵인샵',
+    ratio: 0,
+    qty_cy: 0,
+    qty_py: 0,
+    growth: 0,
+  },
+  {
+    cls: '기타',
+    ratio: 0,
+    qty_cy: 0,
+    qty_py: 0,
+    growth: 0,
+  },
+];
+
 const SearchStatusData = {
   OwnChartData: SearchOwnChartData,
   NormalChartData: SearchNormalChartData,
@@ -1002,6 +1120,8 @@ const SearchStatusData = {
   WeeklyTableData: SearchWeeklyTableData,
   InventoryChart: InventoryChart,
   InventorySummaryData: InventorySummaryData,
+  ChannelChart: ChannelChart,
+  ChannelTable: ChannelTable,
 };
 
 export { SearchStatusData };
