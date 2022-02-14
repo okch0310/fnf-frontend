@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
 
@@ -98,9 +98,6 @@ const useStyles = makeStyles({
 
 export default function SearchSelectedTable() {
   const classes = useStyles();
-  // const style = {
-  //   color: '#ee4cfc',
-  // };
   return (
     <Scrollbars
       autoHideTimeout={1000}
@@ -130,7 +127,6 @@ export default function SearchSelectedTable() {
                     <StyledTableCell component="th" scope="row">
                       {competitor}
                     </StyledTableCell>
-
                     <StyledTableCell align="right">
                       {convertedCy}
                     </StyledTableCell>
@@ -151,6 +147,7 @@ export default function SearchSelectedTable() {
 
 const TableWrapper = styled.div`
   width: 100%;
+  word-break: keep-all;
 `;
 
 const TableTitle = styled.div`

@@ -13,11 +13,6 @@ import {
   ComposedChart,
 } from 'recharts';
 
-// const PERIOD = [
-//   { name: '당해', stroke: '#377EF9' },
-//   { name: '전년', stroke: '#d261ff' },
-// ];
-
 const data = [
   {
     end_dt: '21.02.07',
@@ -354,7 +349,6 @@ export default function SearchNormalChart() {
               stroke="#7b7b7b"
               dx={-6}
               axisLine={false}
-              // hide={true}
             />
             <Legend
               verticalAlign="top"
@@ -384,7 +378,6 @@ export default function SearchNormalChart() {
               fillOpacity={1}
               fill="url(#ThisYear)"
             />
-
             <defs>
               <linearGradient id="ThisYear" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#377ef9" stopOpacity={0.7} />
@@ -397,18 +390,6 @@ export default function SearchNormalChart() {
                 <stop offset="95%" stopColor="#5877ad" stopOpacity={0} />
               </linearGradient>
             </defs>
-            {/* {PERIOD.map(item => (
-              <Area
-                key=""
-                dataKey={item.name}
-                stroke={item.stroke}
-                dot={false}
-                type="monotone"
-                strokeWidth={2}
-                activeDot={{ r: 7 }}
-                fill="url(#NormalChart)"
-              />
-            ))} */}
           </ComposedChart>
         </ResponsiveContainer>
       )}
@@ -441,7 +422,6 @@ const CustomTooltips = styled.div`
   background-color: #06183a;
   border: 1px solid #efefef;
   border-radius: 7px;
-  /* color: white; */
   padding: 16px;
 `;
 

@@ -1,11 +1,11 @@
-import React from 'react';
-// import ContentCard from '../../../../../components/ContentCard/ContentCard';
+import React, { useState } from 'react';
 import { Card } from '../../../../../components/ContentCard/ContentCard';
 import SearchWeeklyTable from './SearchWeeklyTable';
 import SearchSelectedTable from './SearchSelectedTable';
 import SearchCompetitorChart from './SearchCompetitorChart';
 import SearchNormalChart from './SearchNormalChart';
 import SearchOwnChart from './SearchOwnChart';
+
 import styled from 'styled-components';
 import PageTitle from '../../../../../components/PageTitle/PageTitle';
 

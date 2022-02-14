@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { SearchStatusContext } from '../SearchStatus/SearchStatus';
 import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
 
@@ -148,6 +149,7 @@ const TableWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  word-break: keep-all;
 `;
 
 const CustomTable = styled(Table)`
@@ -168,6 +170,7 @@ const TableTitle = styled.div`
   background-color: #377ef9;
   border-radius: 7px 7px 0 0;
   z-index: 2;
+
   svg:hover {
     cursor: pointer;
   }
@@ -200,7 +203,7 @@ const StyledTableRow = withStyles({
     '&:hover': {
       cursor: 'pointer',
       backgroundColor: '#377ef9',
-      fontcolor: 'white',
+      color: 'white',
     },
   },
 })(TableRow);
