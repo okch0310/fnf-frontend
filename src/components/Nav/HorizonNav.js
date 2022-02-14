@@ -32,6 +32,11 @@ const HorizonNav = () => {
   const [, setDataLoadedCount] = useRecoilState(dataLoadedCount);
   const { queryString } = useMakeQuery();
 
+  const { categories, subcategories, seasons } = selectedFilterOptions;
+
+  const isFilterAllSelected =
+    categories !== '' && subcategories.size !== 0 && seasons.size !== 0;
+
   const showFilter = () => {
     clickBoolean(setShowFilterOptions);
   };
@@ -41,6 +46,12 @@ const HorizonNav = () => {
       setFilterOptions(result.data);
     });
   }, []);
+
+  const searchBtnClick = () => {
+    isFilterAllSelected
+      ? getStatistics()
+      : alert('검색 필터를 모두 선택해주시기 바랍니다.');
+  };
 
   async function getStatistics() {
     const prevStat = { ...statData };
@@ -54,11 +65,10 @@ const HorizonNav = () => {
       let result = await promise;
       // 누산값 변경 (3)
       result = await axios
-        .get(`http://${url}?brand=M&adult-kids=성인&${queryString}`)
+        .get(`${url}?brand=M&adult-kids=성인&${queryString}`)
         .then(res => {
           setStatData(prev => {
             prevStat[DATANAME[idx]] = res.data;
-            console.log(prevStat);
             return { ...prevStat };
           });
           setDataLoadedCount(current => {
@@ -109,7 +119,7 @@ const HorizonNav = () => {
             />
           )}
         </SelectSeason>
-        <SelectButton getStatistics={getStatistics} />
+        <SelectButton click={searchBtnClick} />
       </ShrinkFilter>
     </NavContainer>
   );

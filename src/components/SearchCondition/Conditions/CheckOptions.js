@@ -74,9 +74,9 @@ const CheckOptions = ({ filterOptions, value }) => {
   return (
     <MultiSelector value={value}>
       <SelectField onClick={showOptions}>
-        <span>
+        <p>
           {VALUE_OBJ[value] === '' ? VALUE_OBJ_KOR[value] : VALUE_OBJ[value]}
-        </span>
+        </p>
         <DropDownImg expand={expand} />
       </SelectField>
       <OptionList expand={expand} dataLoadedCount={atomDataLoadedCount}>
@@ -127,12 +127,20 @@ const MultiSelector = styled.div`
 `;
 
 const SelectField = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid #aeaeae;
   border-radius: 4px;
   background-color: white;
+
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 const DropDownImg = styled(DropdownIcon)`

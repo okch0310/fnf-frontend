@@ -41,6 +41,7 @@ export default function SalesChannelChart({ data }) {
             dx={-6}
             tick={{ fontSize: 12 }}
             tickLine={{ stroke: 'none' }}
+            domain={[-10, 'dataMax']}
           />
           <Tooltip />
           <Legend
@@ -75,6 +76,6 @@ export default function SalesChannelChart({ data }) {
 const CustomCard = styled(Card)`
   border-radius: 10px;
   padding: 40px;
-  width: 45vw;
+  width: 44vw;
   height: 75vh;
 `;

@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
+import { dataStringFormatter } from '../../../../../utils/Functions';
+
 import {
   Table,
   TableBody,
@@ -135,14 +138,30 @@ export default function UserTable({ data }) {
           {data.map(item => (
             <TableRow key={item.end_dt + 'inventory'}>
               <TableCell align="center">{item.end_dt}</TableCell>
-              <TableCell align="center">{item.sale_qty_kor_ttl}</TableCell>
-              <TableCell align="center">{item.sale_qty_kor_ttl_py}</TableCell>
-              <TableCell align="center">{item.sale_qty_kor_ttl_py2}</TableCell>
-              <TableCell align="center">{item.os}</TableCell>
-              <TableCell align="center">{item.stor_qty_kor}</TableCell>
-              <TableCell align="center">{item.stock_qty_kor}</TableCell>
-              <TableCell align="center">{item.search_qty_cy}</TableCell>
-              <TableCell align="center">{item.search_qty_py}</TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.sale_qty_kor_ttl)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.sale_qty_kor_ttl_py)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.sale_qty_kor_ttl_py2)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.os)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.stor_qty_kor)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.stock_qty_kor)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.search_qty_cy)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.search_qty_py)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -152,7 +171,7 @@ export default function UserTable({ data }) {
 }
 
 const TableWrapper = styled.section`
-  height: 100%;
+  height: 45vh;
   text-align: center;
   overflow-y: auto;
   word-break: keep-all;

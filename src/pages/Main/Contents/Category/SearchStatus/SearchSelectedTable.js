@@ -113,10 +113,12 @@ export default function SearchSelectedTable({ data }) {
         </TableTitle>
         <Table className={classes.table} aria-label="customized table">
           <TableRow>
-            <TableHeaderCell width="15%">브랜드</TableHeaderCell>
-            <TableHeaderCell align="right">당해검색량</TableHeaderCell>
-            <TableHeaderCell align="right">전년검색량</TableHeaderCell>
-            <TableHeaderCell align="right">전년비</TableHeaderCell>
+            <TableHeaderCell width="15%" align="center">
+              브랜드
+            </TableHeaderCell>
+            <TableHeaderCell align="center">당해검색량</TableHeaderCell>
+            <TableHeaderCell align="center">전년검색량</TableHeaderCell>
+            <TableHeaderCell align="center">전년비</TableHeaderCell>
           </TableRow>
           <TableBody>
             {data.map(
@@ -125,16 +127,16 @@ export default function SearchSelectedTable({ data }) {
                 const convertedPy = dataStringFormatter(search_qty_py);
                 return (
                   <StyledTableRow key={competitor}>
-                    <StyledTableCell component="th" scope="row">
+                    <StyledTableCell component="th" scope="row" align="center">
                       {competitor}
                     </StyledTableCell>
-                    <StyledTableCell align="right">
+                    <StyledTableCell align="center">
                       {convertedCy}
                     </StyledTableCell>
-                    <StyledTableCell align="right">
+                    <StyledTableCell align="center">
                       {convertedPy}
                     </StyledTableCell>
-                    <StyledTableCell align="right">{growth}%</StyledTableCell>
+                    <StyledTableCell align="center">{growth}%</StyledTableCell>
                   </StyledTableRow>
                 );
               }

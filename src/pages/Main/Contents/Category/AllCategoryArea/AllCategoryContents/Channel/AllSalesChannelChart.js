@@ -48,6 +48,7 @@ export default function AllSalesChannelChart({ selfComp, data }) {
               dx={-6}
               tick={{ fontSize: 12 }}
               tickLine={{ stroke: 'none' }}
+              domain={[-10, 'dataMax']}
             />
             <Tooltip />
             <Legend
@@ -82,7 +83,7 @@ export default function AllSalesChannelChart({ selfComp, data }) {
 
 const CustomCard = styled(Card)`
   border-radius: 10px;
-  padding: 40px;
+  padding: 30px;
   ${props => !props.isZoomInClicked && 'width:26vw;'};
   height: 100%;
 `;

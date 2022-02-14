@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { dataStringFormatter } from '../../../../../utils/Functions';
+
 import {
   Table,
   TableBody,
@@ -60,12 +62,24 @@ export default function UserTable({ data }) {
           {data.map(item => (
             <TableRow key={item.term_cls}>
               <TableCell align="center">{item.term_cls}</TableCell>
-              <TableCell align="center">{item.int_stock_qty}</TableCell>
-              <TableCell align="center">{item.stor_qty_kor_term}</TableCell>
-              <TableCell align="center">{item.sale_qty_w}</TableCell>
-              <TableCell align="center">{item.avg_4wk_sale_qty}</TableCell>
-              <TableCell align="center">{item.stock_kor}</TableCell>
-              <TableCell align="center">{item.woi_4wks}</TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.int_stock_qty)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.stor_qty_kor_term)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.sale_qty_w)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.avg_4wk_sale_qty)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.stock_kor)}
+              </TableCell>
+              <TableCell align="center">
+                {dataStringFormatter(item.woi_4wks)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

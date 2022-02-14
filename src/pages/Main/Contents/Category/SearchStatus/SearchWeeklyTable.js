@@ -111,10 +111,12 @@ export default function SearchWeeklyTable({ data }) {
         </TableTitle>
         <CustomTable className={classes.table} aria-label="customized table">
           <TableRow>
-            <TableRowCell width="15%">브랜드</TableRowCell>
-            <TableRowCell align="right">당해검색량</TableRowCell>
-            <TableRowCell align="right">전년검색량</TableRowCell>
-            <TableRowCell align="right">전년비</TableRowCell>
+            <TableRowCell width="15%" align="center">
+              브랜드
+            </TableRowCell>
+            <TableRowCell align="center">당해검색량</TableRowCell>
+            <TableRowCell align="center">전년검색량</TableRowCell>
+            <TableRowCell align="center">전년비</TableRowCell>
           </TableRow>
           <TableBody>
             {data.map(
@@ -123,16 +125,16 @@ export default function SearchWeeklyTable({ data }) {
                 const convertedPy = dataStringFormatter(search_qty_py);
                 return (
                   <StyledTableRow key={competitor}>
-                    <StyledTableCell component="th" scope="row">
+                    <StyledTableCell component="th" scope="row" align="center">
                       {competitor}
                     </StyledTableCell>
-                    <StyledTableCell align="right">
+                    <StyledTableCell align="center">
                       {convertedCy}
                     </StyledTableCell>
-                    <StyledTableCell align="right">
+                    <StyledTableCell align="center">
                       {convertedPy}
                     </StyledTableCell>
-                    <StyledTableCell align="right">{growth}%</StyledTableCell>
+                    <StyledTableCell align="center">{growth}%</StyledTableCell>
                   </StyledTableRow>
                 );
               }
