@@ -1,34 +1,67 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { staticData } from '../../../../../atom/staticData';
 import { Card } from '../../../../../components/ContentCard/ContentCard';
 import SearchWeeklyTable from './SearchWeeklyTable';
 import SearchSelectedTable from './SearchSelectedTable';
 import SearchCompetitorChart from './SearchCompetitorChart';
 import SearchNormalChart from './SearchNormalChart';
 import SearchOwnChart from './SearchOwnChart';
-
 import styled from 'styled-components';
 import PageTitle from '../../../../../components/PageTitle/PageTitle';
 
 export default function SearchStatus() {
+  const atomStaticData = useRecoilValue(staticData);
+
   return (
     <Wrapper>
       <PageTitle title="마켓검색량" />
       <SearchDataViews>
         <TableWrapper>
           <UpperWrapper>
-            <CustomContentCard children={<SearchWeeklyTable />} />
+            <CustomContentCard
+              children={
+                <SearchWeeklyTable
+                  data={atomStaticData.searchCountTableWeekly.data}
+                />
+              }
+            />
           </UpperWrapper>
           <BottomWrapper>
-            <CustomContentCard children={<SearchSelectedTable />} />
+            <CustomContentCard
+              children={
+                <SearchSelectedTable
+                  data={atomStaticData.searchCountTablePeriod.data}
+                />
+              }
+            />
           </BottomWrapper>
         </TableWrapper>
         <ChartWrapper>
           <UpperWrapper>
-            <CustomContentCard children={<SearchNormalChart />} />
-            <CustomContentCard children={<SearchOwnChart />} />
+            <CustomContentCard
+              children={
+                <SearchNormalChart
+                  data={atomStaticData.searchCountTimeseriesOverall.data}
+                />
+              }
+            />
+            <CustomContentCard
+              children={
+                <SearchOwnChart
+                  data={atomStaticData.searchCountTimeseriesBrand.data}
+                />
+              }
+            />
           </UpperWrapper>
           <BottomWrapper>
-            <CustomContentCard children={<SearchCompetitorChart />} />
+            <CustomContentCard
+              children={
+                <SearchCompetitorChart
+                  data={atomStaticData.searchCountTimeseriesCompetitors.data}
+                />
+              }
+            />
           </BottomWrapper>
         </ChartWrapper>
       </SearchDataViews>
