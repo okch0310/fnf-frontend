@@ -13,11 +13,6 @@ import {
   ComposedChart,
 } from 'recharts';
 
-// const PERIOD = [
-//   { name: '당해', stroke: '#00b374' },
-//   { name: '전년', stroke: '#ffd688' },
-// ];
-
 const data = [
   {
     end_dt: '21.02.07',
@@ -394,16 +389,6 @@ export default function SearchOwnChart() {
                 <stop offset="95%" stopColor="#67a8a6" stopOpacity={0} />
               </linearGradient>
             </defs>
-            {/* {PERIOD.map(item => (
-              <Line
-                key=""
-                dataKey={item.name}
-                stroke={item.stroke}
-                dot={false}
-                type="monotone"
-                strokeWidth={2}
-              />
-            ))} */}
           </ComposedChart>
         </ResponsiveContainer>
       )}
@@ -437,7 +422,6 @@ const CustomTooltips = styled.div`
   background-color: #06183a;
   border: 1px solid #efefef;
   border-radius: 7px;
-  /* color: white; */
   padding: 16px;
 `;
 

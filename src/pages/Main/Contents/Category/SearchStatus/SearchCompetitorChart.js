@@ -202,7 +202,6 @@ const CustomTooltips = styled.div`
   background-color: #06183a;
   border: 1px solid #efefef;
   border-radius: 7px;
-  /* color: white; */
   padding: 16px;
 `;
 
