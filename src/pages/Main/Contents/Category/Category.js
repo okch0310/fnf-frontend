@@ -8,6 +8,7 @@ import { API } from '../../../../components/Nav/HorizonNavContents/contants/api'
 
 import SearchStatus from './SearchStatus/SearchStatus';
 import SalesInventory from './SalesInventoryStatus/SalesInventory';
+import SalesChannelStatus from './SalesChannelStatus/SalesChannelStatus';
 import AllCategoryData from './AllCategoryArea/AllCategoryArea';
 
 import useInterval from '../../../../hook/useInterval';
@@ -16,7 +17,7 @@ const SELECTED_COMPONENTS = {
   all: <AllCategoryData />,
   검색량: <SearchStatus />,
   주간실적: <SalesInventory />,
-  판매채널: 'channel',
+  판매채널: <SalesChannelStatus />,
 };
 
 const waitString = ['원단을 고르는 중', '공장 가공 중', '배송 중', '도착 직전'];
