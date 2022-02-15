@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SalesInventoryChart from './SalesInventoryChart';
 import ContentCard from '../../../../../components/ContentCard/ContentCard';
 import SalesInventoryTable from './SalesInventoryTable';
@@ -7,14 +7,34 @@ import SalesPerformanceSeasonTable from './SalesPerformanceSeasonTable';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { staticData } from '../../../../../atom/staticData';
-
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 export default function SalesInventory() {
-  const [atomStaticData] = useRecoilState(staticData);
+  const [atomStaticData, setAtomStaticData] = useRecoilState(staticData);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenTwo, setIsOpenTwo] = useState(false);
+  const [isOpenThree, setIsOpenThree] = useState(false);
+  const [isOpenFour, setIsOpenFour] = useState(false);
 
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
+
+  function toggleModalTwo() {
+    setIsOpenTwo(!isOpenTwo);
+  }
+
+  function toggleModalThree() {
+    setIsOpenThree(!isOpenThree);
+  }
+
+  function toggleModalFour() {
+    setIsOpenFour(!isOpenFour);
+  }
   return (
     <InventoryWrapper>
       <LeftWrapper>
-        <WrapperOne>
+        <WrapperOne onClick={toggleModal}>
           <ContentCard
             children={
               <SalesInventoryChart
@@ -22,8 +42,23 @@ export default function SalesInventory() {
               />
             }
           />
+          <Modal
+            isOpen={isOpen}
+            onRequestClose={toggleModal}
+            contentLabel="My dialog"
+          >
+            <button onClick={toggleModal}>X</button>
+            <ContentCard
+              children={
+                <SalesInventoryChart
+                  data={atomStaticData.salesWeeklySummary.data}
+                />
+              }
+            />
+          </Modal>
         </WrapperOne>
-        <WrapperTwo>
+
+        <WrapperTwo onClick={toggleModalTwo}>
           <ContentCard
             children={
               <SalesInventoryTable
@@ -31,10 +66,24 @@ export default function SalesInventory() {
               />
             }
           />
+          <Modal
+            isOpen={isOpenTwo}
+            onRequestClose={toggleModalTwo}
+            contentLabel="My dialog"
+          >
+            <button onClick={toggleModalTwo}>X</button>
+            <ContentCard
+              children={
+                <SalesInventoryTable
+                  data={atomStaticData.salesWeeklySummary.data}
+                />
+              }
+            />
+          </Modal>
         </WrapperTwo>
       </LeftWrapper>
       <RightWrapper>
-        <WrapperThree>
+        <WrapperThree onClick={toggleModalThree}>
           <ContentCard
             children={
               <SalesPerformanceTable
@@ -42,8 +91,22 @@ export default function SalesInventory() {
               />
             }
           />
+          <Modal
+            isOpen={isOpenThree}
+            onRequestClose={toggleModalThree}
+            contentLabel="My dialog"
+          >
+            <button onClick={toggleModalThree}>X</button>
+            <ContentCard
+              children={
+                <SalesPerformanceTable
+                  data={atomStaticData.salesSummaryAcc.data}
+                />
+              }
+            />
+          </Modal>
         </WrapperThree>
-        <WrapperFour>
+        <WrapperFour onClick={toggleModalFour}>
           <ContentCard
             children={
               <SalesPerformanceSeasonTable
@@ -51,6 +114,20 @@ export default function SalesInventory() {
               />
             }
           />
+          <Modal
+            isOpen={isOpenFour}
+            onRequestClose={toggleModalFour}
+            contentLabel="My dialog"
+          >
+            <button onClick={toggleModalFour}>X</button>
+            <ContentCard
+              children={
+                <SalesPerformanceSeasonTable
+                  data={atomStaticData.salesSummaryAccSesn.data}
+                />
+              }
+            />
+          </Modal>
         </WrapperFour>
       </RightWrapper>
     </InventoryWrapper>
