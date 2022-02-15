@@ -20,6 +20,8 @@ export default function SalesChannelTable({ onlyTable, data }) {
         <CustomTable>
           <TableHead
             style={{
+              position: 'sticky',
+              top: 0,
               backgroundColor: '#377ef9',
             }}
           >
