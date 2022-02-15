@@ -53,9 +53,9 @@ const SearchWrapper = styled.section`
 `;
 const SearchCompetitorWrapper = styled.div`
   ${props => !props.isZoomInClicked && 'width:26vw;'};
-  height: 52vh;
+  height: 44vh;
 `;
 
 const SearchChartAreaWrapper = styled.div`
-  height: 34vh;
+  height: 42vh;
 `;
