@@ -174,4 +174,6 @@ export default function SalesInventoryChart({ data }) {
 const ChartWrapper = styled.section`
   width: 36vw;
   height: 46vh;
+  /* width: 100%;
+  height: 100%; */
 `;
