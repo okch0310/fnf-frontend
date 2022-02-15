@@ -32,3 +32,8 @@ export const dataLoadedCount = atom({
   key: 'dataLoadedCount',
   default: 0,
 });
+
+export const dataLoadedProgress = atom({
+  key: 'dataLoadedProgress',
+  default: false,
+});

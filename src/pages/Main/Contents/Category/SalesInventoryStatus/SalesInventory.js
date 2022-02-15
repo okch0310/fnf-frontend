@@ -46,6 +46,11 @@ export default function SalesInventory() {
             isOpen={isOpen}
             onRequestClose={toggleModal}
             contentLabel="My dialog"
+            style={{
+              content: {
+                left: '6%',
+              },
+            }}
           >
             <button onClick={toggleModal}>X</button>
             <ContentCard
@@ -70,6 +75,11 @@ export default function SalesInventory() {
             isOpen={isOpenTwo}
             onRequestClose={toggleModalTwo}
             contentLabel="My dialog"
+            style={{
+              content: {
+                left: '6%',
+              },
+            }}
           >
             <button onClick={toggleModalTwo}>X</button>
             <ContentCard
@@ -95,6 +105,11 @@ export default function SalesInventory() {
             isOpen={isOpenThree}
             onRequestClose={toggleModalThree}
             contentLabel="My dialog"
+            style={{
+              content: {
+                left: '6%',
+              },
+            }}
           >
             <button onClick={toggleModalThree}>X</button>
             <ContentCard
@@ -118,6 +133,11 @@ export default function SalesInventory() {
             isOpen={isOpenFour}
             onRequestClose={toggleModalFour}
             contentLabel="My dialog"
+            style={{
+              content: {
+                left: '6%',
+              },
+            }}
           >
             <button onClick={toggleModalFour}>X</button>
             <ContentCard
@@ -144,7 +164,7 @@ const InventoryWrapper = styled.section`
 const LeftWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 45%;
+  width: 46%;
   height: 46%;
   gap: 2vh;
 `;

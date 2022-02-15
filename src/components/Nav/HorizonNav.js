@@ -14,6 +14,7 @@ import {
   staticData,
   isDataLoaded,
   dataLoadedCount,
+  dataLoadedProgress,
 } from '../../atom/staticData';
 
 import useMakeQuery from '../../components/Nav/HorizonNavContents/hook/useMakeQuery';
@@ -30,12 +31,16 @@ const HorizonNav = () => {
   const [statData, setStatData] = useRecoilState(staticData);
   const [, setDataLoaded] = useRecoilState(isDataLoaded);
   const [, setDataLoadedCount] = useRecoilState(dataLoadedCount);
+  const [isLoading, setIsLoading] = useRecoilState(dataLoadedProgress);
   const { queryString } = useMakeQuery();
 
   const { categories, subcategories, seasons } = selectedFilterOptions;
 
   const isFilterAllSelected =
-    categories !== '' && subcategories.size !== 0 && seasons.size !== 0;
+    categories !== '' &&
+    subcategories.size !== 0 &&
+    seasons.size !== 0 &&
+    isLoading === false;
 
   const showFilter = () => {
     clickBoolean(setShowFilterOptions);
@@ -50,12 +55,15 @@ const HorizonNav = () => {
   const searchBtnClick = () => {
     isFilterAllSelected
       ? getStatistics()
+      : isLoading
+      ? alert('다른 필터의 선택이 필요한 경우 새로고침 후 진행해주세요.')
       : alert('검색 필터를 모두 선택해주시기 바랍니다.');
   };
 
   async function getStatistics() {
     const prevStat = { ...statData };
 
+    setIsLoading(true);
     setDataLoaded(false);
     setDataLoadedCount(0);
 
@@ -79,6 +87,7 @@ const HorizonNav = () => {
       // 다음 Promise 리턴
       return result;
     }, {}).then(() => {
+      setIsLoading(false);
       setDataLoaded(true);
       setDataLoadedCount(0);
     });
