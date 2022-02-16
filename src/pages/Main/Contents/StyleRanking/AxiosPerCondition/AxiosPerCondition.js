@@ -6,4 +6,5 @@ export default function AxiosPerCondition() {
 
 const ConditionWrapper = styled.section`
   flex-basis: 22%;
+  text-align: center;
 `;

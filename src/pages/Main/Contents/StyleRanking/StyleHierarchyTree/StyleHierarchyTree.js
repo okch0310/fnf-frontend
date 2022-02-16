@@ -7,4 +7,5 @@ export default function StyleHierarchyTree() {
 const TreeWrapper = styled.section`
   flex-basis: 3%;
   //flex-basis:22%;
+  text-align: center;
 `;

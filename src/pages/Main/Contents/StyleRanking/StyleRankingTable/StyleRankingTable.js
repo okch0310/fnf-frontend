@@ -6,5 +6,6 @@ export default function StyleRankingTable() {
 
 const RankingTableWrapper = styled.section`
   flex-basis: 75%;
+  text-align: center;
   // flex-basis:56%;
 `;
