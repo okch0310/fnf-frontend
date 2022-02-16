@@ -157,7 +157,7 @@ const RightWrapper = styled.div`
   gap: 2vh;
 `;
 
-const WrapperOne = styled.div`
+const WrapperOne = styled.section`
   /* :hover {
     border: 2px solid grey;
     border-radius: 5px;
