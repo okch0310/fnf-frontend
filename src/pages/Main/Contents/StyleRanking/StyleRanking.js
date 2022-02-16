@@ -20,4 +20,5 @@ const StyleRankingWrapper = styled.section`
   width: 100%;
   height: 94.8vh;
   display: flex;
+  padding: 0 1vw;
 `;
