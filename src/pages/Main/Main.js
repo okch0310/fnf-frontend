@@ -8,11 +8,9 @@ import styled from 'styled-components';
 
 import HorizonNav from '../../components/Nav/HorizonNav';
 import Category from './Contents/Category/Category';
-import StyleRanking from './Contents/StyleRanking/StyleRanking';
 
 const COMPONENTS_BY_LOCATION = {
   '/category': <Category />,
-  '/styleranking': <StyleRanking />,
 };
 
 const Main = () => {
