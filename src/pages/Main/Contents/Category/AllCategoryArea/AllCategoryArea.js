@@ -35,7 +35,6 @@ export default function AllCategoryData() {
         <FullRangeContentModal
           clickedContent={clickedContent}
           isZoomInClicked={isZoomInClicked}
-          setIsZoomInClicked={setIsZoomInClicked}
         />
         <EachPageView>
           {Object.entries(CATEGORY_EACH_PAGES).map((item, index) => (
