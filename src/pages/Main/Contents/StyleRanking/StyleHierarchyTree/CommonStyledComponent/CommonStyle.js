@@ -34,7 +34,7 @@ export const TreeInnerWrapper = styled.div`
       ? '25%;'
       : props.name === '아이템'
       ? '60%;'
-      : props.name === '성인' && '15%'};
+      : props.name === '성인/키즈' && '15%'};
   border-bottom: 2px solid #ddd;
 
   overflow-y: auto;
