@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { clickBoolean } from '../../utils/Functions';
+import {
+  clickBoolean,
+  dateConverter,
+  setRecentSunday,
+} from '../../utils/Functions';
 import { HorizonNavTri } from '../../styles/icons';
 import ChartRange from '../SearchCondition/Conditions/ChartRange';
 import WeeklyPerformance from '../SearchCondition/Conditions/WeeklyPerformance';
@@ -24,10 +29,14 @@ import {
   DATANAME,
 } from '../Nav/HorizonNavContents/contants/api';
 
+import SerialNum from '../SearchCondition/Conditions/SerialNum';
+import DeadlineWeek from '../SearchCondition/Conditions/DeadlineWeek';
+
 const HorizonNav = () => {
   const [showFilterOptions, setShowFilterOptions] = useState(false);
   const [filterOptions, setFilterOptions] = useState({});
-  const [selectedFilterOptions] = useRecoilState(filterSelect);
+  const [selectedFilterOptions, setSelectedFilterOptions] =
+    useRecoilState(filterSelect);
   const [statData, setStatData] = useRecoilState(staticData);
   const [, setDataLoaded] = useRecoilState(isDataLoaded);
   const [, setDataLoadedCount] = useRecoilState(dataLoadedCount);
@@ -35,6 +44,8 @@ const HorizonNav = () => {
   const { queryString } = useMakeQuery();
 
   const { categories, subcategories, seasons } = selectedFilterOptions;
+
+  const location = useLocation().pathname;
 
   const isFilterAllSelected =
     categories !== '' &&
@@ -53,12 +64,29 @@ const HorizonNav = () => {
   }, []);
 
   const searchBtnClick = () => {
-    isFilterAllSelected
-      ? getStatistics()
-      : isLoading
-      ? alert('다른 필터의 선택이 필요한 경우 새로고침 후 진행해주세요.')
-      : alert('검색 필터를 모두 선택해주시기 바랍니다.');
+    if (location === '/category') {
+      isFilterAllSelected
+        ? getStatistics()
+        : isLoading
+        ? alert('다른 필터의 선택이 필요한 경우 새로고침 후 진행해주세요.')
+        : alert('검색 필터를 모두 선택해주시기 바랍니다.');
+    } else {
+      getStatistics();
+    }
   };
+
+  const resetSelect = () => {
+    setSelectedFilterOptions(prev => {
+      const prevState = { ...prev };
+
+      prevState[`serial-number`] = '';
+      prevState.ranking = '200';
+
+      return { ...prevState };
+    });
+  };
+
+  console.log('horizon: ', selectedFilterOptions);
 
   async function getStatistics() {
     const prevStat = { ...statData };
@@ -102,33 +130,54 @@ const HorizonNav = () => {
         <HorizonNavTri />
       </NavExpBtnContainer>
       <ShrinkFilter showFilterOptions={showFilterOptions}>
-        <ChartRange />
-        <WeeklyPerformance value="weekly-date" />
-        <ProductType>
-          {filterOptions.categories && (
-            <CheckOptions
-              value="categories" //데이터 접근을 위한 표시자
-              filterOptions={filterOptions.categories}
-            />
-          )}
-          {filterOptions.subcategories && (
-            <CheckOptions
-              value="subcategories"
-              filterOptions={
-                filterOptions.subcategories[selectedFilterOptions.categories]
-              }
-            />
-          )}
-        </ProductType>
-        <SelectSeason>
-          {filterOptions.seasons && (
-            <CheckOptions
-              value="seasons"
-              filterOptions={filterOptions.seasons}
-            />
-          )}
-        </SelectSeason>
-        <SelectButton click={searchBtnClick} />
+        {location === `/category` ? (
+          <>
+            <ChartRange />
+            <WeeklyPerformance value="weekly-date" />
+            <ProductType>
+              {filterOptions.categories && (
+                <CheckOptions
+                  value="categories" //데이터 접근을 위한 표시자
+                  filterOptions={filterOptions.categories}
+                />
+              )}
+              {filterOptions.subcategories && (
+                <CheckOptions
+                  value="subcategories"
+                  filterOptions={
+                    filterOptions.subcategories[
+                      selectedFilterOptions.categories
+                    ]
+                  }
+                />
+              )}
+            </ProductType>
+            <SelectSeason>
+              {filterOptions.seasons && (
+                <CheckOptions
+                  value="seasons"
+                  filterOptions={filterOptions.seasons}
+                />
+              )}
+            </SelectSeason>
+          </>
+        ) : (
+          <>
+            <SelectButton type="reset" value="초기화" click={resetSelect} />
+            <SerialNumContainer>
+              <SerialNum serialNumber="제품명 또는 품번" val="serial-number" />
+            </SerialNumContainer>
+            <RankingContainer>
+              <RankingInput
+                numberType="number"
+                defaultValue={200}
+                val="ranking"
+              />
+            </RankingContainer>
+            <DeadlineWeek />
+          </>
+        )}
+        <SelectButton type="search" value="검색" click={searchBtnClick} />
       </ShrinkFilter>
     </NavContainer>
   );
@@ -188,5 +237,15 @@ const ProductType = styled.div`
 `;
 
 const SelectSeason = styled.div``;
+
+const SerialNumContainer = styled.div`
+  width: 290px;
+`;
+
+const RankingContainer = styled.div`
+  width: 100px;
+`;
+
+const RankingInput = styled(SerialNum)``;
 
 export default HorizonNav;

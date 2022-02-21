@@ -7,6 +7,14 @@ export function dateConverter(dateObj) {
   return result;
 }
 
+export function setRecentSunday(dateObj) {
+  const toDate = dateObj.getDate();
+  const toDay = dateObj.getDay();
+  dateObj.setDate(toDate - toDay);
+
+  return dateObj;
+}
+
 export function clickBoolean(setState) {
   setState(prev => {
     return !prev;

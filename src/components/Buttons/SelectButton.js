@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { css, ThemeContext } from 'styled-components';
 
-export default function SelectButton({ click }) {
+export default function SelectButton({ type, value, click }) {
   const themeContext = useContext(ThemeContext);
   return (
     <Buttons
+      type={type}
+      value={value}
       onClick={click}
       monoColors={themeContext.monoColors}
       cardColors={themeContext.cardColors}
       pointColors={themeContext.pointColors}
     >
-      검색
+      {value}
     </Buttons>
   );
 }
@@ -24,10 +26,28 @@ const Buttons = styled.button`
   border-radius: 4px;
   font-size: 16px;
 
-  :hover {
-    color: white;
-    background-color: ${props => props.pointColors.green};
-    border: none;
-    border-radius: 4px;
-  }
+  ${({ type }) => {
+    switch (type) {
+      case 'search':
+        return css`
+          &:hover {
+            color: white;
+            background-color: ${props => props.pointColors.green};
+            border: none;
+            border-radius: 4px;
+          }
+        `;
+      case 'reset':
+        return css`
+          &:hover {
+            color: white;
+            background-color: #ee4c58;
+            border: none;
+            border-radius: 4px;
+          }
+        `;
+      default:
+        break;
+    }
+  }}
 `;
