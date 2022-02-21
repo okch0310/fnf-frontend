@@ -215,28 +215,33 @@ export default function SearchResult() {
           </GetCSVBtn>
         </GetCSVBtnWrapper>
       </SearchResultHeader>
-      <ReactTabulator
-        onRef={ref => (tableRef = ref)}
-        data={data}
-        columns={columns}
-        options={options}
-        events={{ rowClick: rowClick }}
-        layout="fitData"
-      />
+      <TabulatorWrapper>
+        <ReactTabulator
+          onRef={ref => (tableRef = ref)}
+          data={data}
+          columns={columns}
+          options={options}
+          events={{ rowClick: rowClick }}
+        />
+      </TabulatorWrapper>
     </SearchResultWrapper>
   );
 }
 
 const SearchResultWrapper = styled.div`
-  height: 100%;
   flex: 1;
-  border-right: 1px solid #adadad;
   background-color: #fff;
+  overflow: hidden;
+`;
 
+const TabulatorWrapper = styled.div`
+  height: 95%;
+  border: 1px solid;
+  border-color: transparent #adadad #adadad transparent;
   overflow: hidden;
 
   .tabulator {
-    height: 95%;
+    height: 100%;
     margin: 0;
     .tabulator-tableholder {
       overflow: auto;

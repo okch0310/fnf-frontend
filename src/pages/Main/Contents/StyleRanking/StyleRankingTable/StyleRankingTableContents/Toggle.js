@@ -194,7 +194,7 @@ export default function Toggle({ name }) {
         {name}
       </ToggleBtn>
       <TogglePage isOpen={isOpen}>
-        <ReactTabulator data={data} columns={columns} layout="fitData" />
+        <ReactTabulator data={data} columns={columns} />
       </TogglePage>
     </ToggleWrapper>
   );
@@ -204,8 +204,6 @@ const ToggleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-basis: ${props => (props.isOpen ? '20%' : '3%')};
-  width: 100%;
-  height: 50%;
   background-color: #fff;
   overflow: hidden;
 `;
@@ -225,8 +223,6 @@ const ToggleBtn = styled.div`
 `;
 
 const TogglePage = styled.div`
-  width: 100%;
-  height: 100%;
   flex-basis: ${props => (props.isOpen ? '85%' : '0%')};
   display: ${props => (props.isOpen ? 'block' : 'none')};
   border: 1px solid;
