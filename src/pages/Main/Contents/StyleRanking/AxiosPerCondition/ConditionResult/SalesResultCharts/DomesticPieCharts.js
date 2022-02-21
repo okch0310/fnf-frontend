@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { conditionData } from '../../../../../../../atom/staticData';
+import { useRecoilValue } from 'recoil';
+
 import styled from 'styled-components';
 
 import ChartsTitle from '../../ChartsTitle/ChartsTitle';
@@ -11,18 +15,6 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts';
-
-const pieData = [
-  {
-    name: '국내',
-    value: 328,
-  },
-  {
-    name: '면세/RF/도매',
-    value: 827,
-  },
-];
-
 const RADIAN = Math.PI / 180;
 
 const COLORS = ['#0088FE', '#00C49F'];
@@ -54,10 +46,19 @@ const renderCustomizedLabel = ({
 };
 
 export default function DomesticPieCharts() {
+  const [pieData, setPieData] = useState();
+  const atomConditionData = useRecoilValue(conditionData);
+
+  useEffect(() => {
+    if (atomConditionData !== false && atomConditionData.ratio !== undefined) {
+      setPieData(atomConditionData.ratio.data);
+    }
+  }, [atomConditionData]);
+
   return (
     <PieChartContainer>
       <ChartsTitle title="판매 트렌드 비율" />
-      {pieData && (
+      {atomConditionData && pieData && (
         <ResponsiveContainer width="100%" height="80%">
           <PieChart>
             <Pie

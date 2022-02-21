@@ -57,3 +57,8 @@ export const dataLoadedProgress = atom({
   key: 'dataLoadedProgress',
   default: false,
 });
+
+export const conditionData = atom({
+  key: 'conditionData',
+  default: undefined,
+});

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 
+import { conditionData } from '../../../../../../../atom/staticData';
+import { useRecoilValue } from 'recoil';
+
+import styled from 'styled-components';
 import ChartsTitle from '../../ChartsTitle/ChartsTitle';
 
 import {
@@ -14,43 +17,29 @@ import {
   Legend,
 } from 'recharts';
 
-const data = [
-  {
-    end_dt: '21.11.28',
-    qty_retail_cy: 7488,
-    qty_dutyrfwhole_cy: 8006,
-  },
-  {
-    end_dt: '21.12.05',
-    qty_retail_cy: 4714,
-    qty_dutyrfwhole_cy: 11251,
-  },
-  {
-    end_dt: '21.12.20',
-    qty_retail_cy: 5414,
-    qty_dutyrfwhole_cy: 15151,
-  },
-];
-
 export default function DomesticCharts() {
   const [chartData, setChartData] = useState([]);
 
+  const atomConditionData = useRecoilValue(conditionData);
+
   useEffect(() => {
-    setChartData(
-      data.map(item => {
-        const newItem = {};
-        newItem.end_dt = item.end_dt;
-        newItem['국내'] = item.qty_retail_cy;
-        newItem['면세RF도매'] = item.qty_dutyrfwhole_cy;
-        return newItem;
-      })
-    );
-  }, []);
+    if (atomConditionData) {
+      setChartData(
+        atomConditionData.korea?.data.map(item => {
+          const newItem = {};
+          newItem.end_dt = item.end_dt;
+          newItem['국내'] = item.qty_retail_cy;
+          newItem['면세RF도매'] = item.qty_dutyrfwhole_cy;
+          return newItem;
+        })
+      );
+    }
+  }, [atomConditionData]);
 
   return (
     <DomesticChart>
       <ChartsTitle title="국내/RF 면세도매" />
-      {chartData && (
+      {atomConditionData && chartData && (
         <ResponsiveContainer width="100%" height="80%">
           <LineChart
             data={chartData}

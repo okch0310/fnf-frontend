@@ -14,13 +14,18 @@ import CheckOptions from '../SearchCondition/Conditions/CheckOptions';
 import SelectButton from '../Buttons/SelectButton';
 
 import { useRecoilState } from 'recoil';
-import { filterSelect } from '../../atom/filterSelect';
+import {
+  filterSelect,
+  selectedEachRowName,
+  selectedEachRowNum,
+} from '../../atom/filterSelect';
 import {
   staticData,
   isDataLoaded,
   dataLoadedCount,
   dataLoadedProgress,
   styleRankingData,
+  conditionData,
   checkedFilters,
 } from '../../atom/staticData';
 
@@ -30,6 +35,7 @@ import {
   API,
   DATANAME,
   STYLERANKING_API,
+  STYLERANKING_NAME,
 } from '../Nav/HorizonNavContents/contants/api';
 
 import SerialNum from '../SearchCondition/Conditions/SerialNum';
@@ -40,20 +46,20 @@ const HorizonNav = () => {
   const [filterOptions, setFilterOptions] = useState({});
   const [selectedFilterOptions, setSelectedFilterOptions] =
     useRecoilState(filterSelect);
-  const [checkedSRFilters, setCheckedSRFilters] =
-    useRecoilState(checkedFilters);
 
   const [statData, setStatData] = useRecoilState(staticData);
   const [atomStyleRankingData, setStyleRankingData] =
     useRecoilState(styleRankingData);
   const [, setDataLoaded] = useRecoilState(isDataLoaded);
   const [, setDataLoadedCount] = useRecoilState(dataLoadedCount);
+  const [, setConditionData] = useRecoilState(conditionData);
+  const [, setSelectedEachRowName] = useRecoilState(selectedEachRowName);
+  const [, setSelectedEachRowNum] = useRecoilState(selectedEachRowNum);
   const [isLoading, setIsLoading] = useRecoilState(dataLoadedProgress);
   const { queryString } = useMakeQuery();
 
-  const { categories, subcategories, seasons } = selectedFilterOptions;
-  const { srSubcategories, domains, items, srSeasons, adult } =
-    checkedSRFilters;
+  const { categories, subcategories, seasons, domains, items } =
+    selectedFilterOptions;
 
   const location = useLocation().pathname;
 
@@ -64,12 +70,8 @@ const HorizonNav = () => {
     isLoading === false;
 
   const isAllChecked =
-    srSubcategories.length &&
-    domains.length &&
-    items.length &&
-    srSeasons.length &&
-    adult.length;
-  console.log(queryString);
+    subcategories.length && domains.length && items.length && seasons.length;
+
   const showFilter = () => {
     clickBoolean(setShowFilterOptions);
   };
@@ -101,10 +103,18 @@ const HorizonNav = () => {
       const prevState = { ...prev };
 
       prevState[`serial-number`] = '';
-      prevState.ranking = '200';
+      prevState.limit = 200;
 
       return { ...prevState };
     });
+    setStyleRankingData({
+      top20Summary: null,
+      top20List: null,
+      top20TotalSummary: null,
+    });
+    setConditionData(false);
+    setSelectedEachRowName('');
+    setSelectedEachRowNum('');
   };
   async function getStyleRankingDatas() {
     const prevStat = { ...atomStyleRankingData };
@@ -112,6 +122,10 @@ const HorizonNav = () => {
     setIsLoading(true);
     setDataLoaded(false);
     setDataLoadedCount(0);
+    const headers = {
+      'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      Accept: '*/*',
+    };
 
     // eslint-disable-next-line no-unused-vars
     const messageObject = await STYLERANKING_API.reduce(
@@ -120,10 +134,10 @@ const HorizonNav = () => {
         let result = await promise;
         // 누산값 변경 (3)
         result = await axios
-          .get(`${url}?brand=M&adult-kids=성인&${queryString}`)
+          .get(`${url}?brand=M&${queryString}`, { headers })
           .then(res => {
-            setStatData(prev => {
-              prevStat[DATANAME[idx]] = res.data;
+            setStyleRankingData(prev => {
+              prevStat[STYLERANKING_NAME[idx]] = res.data;
               return { ...prevStat };
             });
             setDataLoadedCount(current => {
@@ -174,6 +188,14 @@ const HorizonNav = () => {
       setDataLoadedCount(0);
     });
   }
+
+  const handleLimit = e => {
+    setSelectedFilterOptions(current => {
+      const newObj = { ...current };
+      newObj[e.target.val] = e.target.value;
+      return newObj;
+    });
+  };
 
   return (
     <NavContainer>
@@ -226,7 +248,8 @@ const HorizonNav = () => {
               <RankingInput
                 numberType="number"
                 defaultValue={200}
-                val="ranking"
+                val="limit"
+                onChange={handleLimit}
               />
               위
             </RankingContainer>

@@ -1,229 +1,157 @@
-import React, { useRef, useState } from 'react';
-import 'react-tabulator/lib/styles.css';
-import 'react-tabulator/css/bootstrap/tabulator_bootstrap.min.css'; // use Theme(s)
+import React from 'react';
 
-import { GrDocumentDownload } from 'react-icons/gr';
+import {
+  selectedEachRowNum,
+  selectedEachRowName,
+} from '../../../../../../atom/filterSelect';
+import { useSetRecoilState } from 'recoil';
 
-import { ReactTabulator } from 'react-tabulator';
+import { DataGrid, GridToolbar } from '@material-ui/data-grid';
 
 import styled from 'styled-components';
 
-const columns = [
-  {
-    title: 'Name',
-    field: 'name',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-  },
-  {
-    title: 'Age',
-    field: 'age',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-    formatter: 'progress',
-    width: 150,
-  },
-  {
-    title: 'Favourite Color',
-    field: 'color',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-  },
-  {
-    title: 'Date Of Birth',
-    field: 'dob',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-  },
-  {
-    title: 'Rating',
-    field: 'rating',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-    formatter: 'star',
-    width: 150,
-  },
-  {
-    title: 'Passed?',
-    field: 'passed',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-    formatter: 'tickCross',
-  },
-];
-const data = [
-  {
-    id: 1,
-    name: 'Oli Bob',
-    age: '12',
-    color: 'red',
-    dob: '01/01/1980',
-    rating: 5,
-    passed: true,
-    pets: ['cat', 'dog'],
-  },
-  {
-    id: 2,
-    name: 'Mary May',
-    age: '1',
-    color: 'green',
-    dob: '12/05/1989',
-    rating: 4,
-    passed: true,
-    pets: ['cat'],
-  },
-  {
-    id: 5,
-    name: 'Margret Marmajuke',
-    age: '16',
-    color: 'yellow',
-    dob: '07/01/1999',
-    rating: 4,
-    passed: false,
-  },
-  {
-    id: 6,
-    name: 'Van Ng',
-    age: '37',
-    color: 'green',
-    dob: '06/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog', 'fish'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
+export default function SearchResult({ srdata }) {
+  const setSelectedEachRowNum = useSetRecoilState(selectedEachRowNum);
+  const setSelectedEachRowName = useSetRecoilState(selectedEachRowName);
 
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-];
-
-export default function SearchResult() {
-  const [selectedRowItem, setSelectedRowItem] = useState('');
-
-  let tableRef = useRef(null);
-  const options = {
-    downloadReady: (fileContents, blob) => blob,
-    selectable: 1,
-  };
-
-  const downloadData = () => {
-    tableRef.current.download('csv', 'data.csv');
-  };
-
-  const rowClick = (e, row) => {
-    const { _row } = row;
-
-    setSelectedRowItem(_row.data.name);
+  const handleSelectedRow = params => {
+    const { row } = params;
+    setSelectedEachRowNum(row.대표품번);
+    setSelectedEachRowName(row.제품명);
   };
 
   return (
     <SearchResultWrapper>
-      <SearchResultHeader>
-        <WhiteSpace />
-        <SearchResultTitle>선택된 필터별 실적</SearchResultTitle>
-        <GetCSVBtnWrapper>
-          <GetCSVBtn onClick={downloadData}>
-            Download CSV
-            <GrDocumentDownload />
-          </GetCSVBtn>
-        </GetCSVBtnWrapper>
-      </SearchResultHeader>
-      <TabulatorWrapper>
-        <ReactTabulator
-          onRef={ref => (tableRef = ref)}
-          data={data}
-          columns={columns}
-          options={options}
-          events={{ rowClick: rowClick }}
-        />
-      </TabulatorWrapper>
+      <SearchResultHeader>선택된 필터별 실적</SearchResultHeader>
+      <TableWrapper>
+        {srdata && (
+          <DataGrid
+            rows={srdata.data}
+            // eslint-disable-next-line no-sparse-arrays
+            columns={[
+              {
+                field: '랭킹',
+
+                width: 120,
+              },
+              {
+                field: '상승',
+                width: 120,
+                renderCell: params => {
+                  return !params.formattedValue.indexOf('↑') ? (
+                    <span style={{ color: 'red' }}>
+                      {params.formattedValue}
+                    </span>
+                  ) : (
+                    <span style={{ color: 'blue' }}>
+                      {params.formattedValue}
+                    </span>
+                  );
+                },
+              },
+              {
+                field: '대표품번',
+                width: 120,
+                minwidth: 120,
+              },
+              {
+                field: '이미지',
+                renderCell: params => {
+                  return (
+                    <img src={params.formattedValue} alt={params} width="50" />
+                  );
+                },
+                width: 120,
+              },
+              {
+                field: '택가',
+                width: 120,
+                type: 'number',
+              },
+              {
+                field: '할인율',
+                width: 120,
+              },
+              {
+                field: '제품명',
+                width: 120,
+              },
+              {
+                field: '추이',
+                width: 120,
+              },
+              {
+                field: '수량',
+                width: 120,
+                type: 'number',
+              },
+              {
+                field: '국내',
+                width: 120,
+                type: 'number',
+              },
+              {
+                field: '면세',
+                width: 120,
+                type: 'number',
+              },
+              ,
+              {
+                field: 'RF도매',
+                width: 120,
+                type: 'number',
+              },
+              {
+                field: '실판',
+                width: 120,
+                type: 'number',
+              },
+              {
+                field: '판매액',
+                width: 120,
+              },
+              {
+                field: '누적판매량',
+                width: 120,
+                type: 'number',
+              },
+              {
+                field: '누적입고량',
+                width: 120,
+                type: 'number',
+              },
+              {
+                field: '물류재고',
+                width: 120,
+                type: 'number',
+              },
+              {
+                field: '총재고',
+                width: 120,
+                type: 'number',
+              },
+              {
+                field: '재고주수',
+                width: 120,
+                type: 'number',
+              },
+              {
+                field: '판매율',
+                width: 120,
+                type: 'number',
+                valueFormatter: params => {
+                  const valueFormatted = Number(params.value).toLocaleString();
+                  return `${valueFormatted} %`;
+                },
+              },
+            ]}
+            components={{ Toolbar: GridToolbar, Footer: () => '' }}
+            onRowClick={(params, event) => {
+              !event.ignore && handleSelectedRow(params);
+            }}
+          />
+        )}
+      </TableWrapper>
     </SearchResultWrapper>
   );
 }
@@ -234,48 +162,18 @@ const SearchResultWrapper = styled.div`
   overflow: hidden;
 `;
 
-const TabulatorWrapper = styled.div`
+const TableWrapper = styled.div`
   height: 95%;
   border: 1px solid;
   border-color: transparent #adadad #adadad transparent;
   overflow: hidden;
-
-  .tabulator {
-    height: 100%;
-    margin: 0;
-    .tabulator-tableholder {
-      overflow: auto;
-    }
-  }
 `;
 
 const SearchResultHeader = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   background-color: #ccc;
   border-bottom: 1px solid #adadad;
   height: 5%;
-`;
-
-const WhiteSpace = styled.div`
-  flex-basis: 33%;
-`;
-
-const SearchResultTitle = styled.div`
-  flex-basis: 34%;
-  font-weight: 600;
-`;
-
-const GetCSVBtnWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  flex-basis: 33%;
-`;
-
-const GetCSVBtn = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  cursor: pointer;
 `;

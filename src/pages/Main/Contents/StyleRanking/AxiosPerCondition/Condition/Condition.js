@@ -1,36 +1,105 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axiosInstance from '../../StyleRankingAPI/baseAxios';
+
+import {
+  selectedEachRowNum,
+  selectedEachRowName,
+} from '../../../../../../atom/filterSelect';
+
+import { conditionData } from '../../../../../../atom/staticData';
+import { useRecoilValue, useRecoilState } from 'recoil';
+
 import styled, { ThemeContext } from 'styled-components';
 
 import ConditionSalesResult from '../ConditionResult/ConditionSalesResult';
 import ConditionWeeklyResult from '../ConditionResult/ConditionWeeklyResult';
 import ConditionChannelsResult from '../ConditionResult/ConditionChannelsResult';
-import ConditionColorsResult from '../ConditionResult/ConditionColorsResult';
-import ConditionColorsMapResult from '../ConditionResult/ConditionColorsMapResult';
+
+const salesTrendEndPoints = ['korea', 'global', 'ratio'];
+const eachChannel = ['overall', 'shops'];
+
+export const ConditionContext = React.createContext();
 
 export default function Condition() {
   const themeContext = useContext(ThemeContext);
 
   const [currentID, setCurrentID] = useState(1);
 
-  const clickHandler = id => {
-    setCurrentID(id);
+  const atomSelectedEachRowNum = useRecoilValue(selectedEachRowNum);
+  const atomSelectedEachRowName = useRecoilValue(selectedEachRowName);
+  const [, setConditionData] = useRecoilState(conditionData);
+
+  const [productNum, setProductNum] = useState('');
+  const [productName, setProductName] = useState('');
+
+  const handleProductNum = e => {
+    setProductNum(e.target.value);
   };
 
-  const btnName = ['매출추이', '주차별', '채널별', '컬러별', '컬러map'];
+  const handleProductName = e => {
+    setProductName(e.target.value);
+  };
+
+  async function clickHandler(id) {
+    switch (id) {
+      case '매출추이':
+        await salesTrendEndPoints.reduce(async (promise, url) => {
+          let result = await promise;
+          result = await axiosInstance({
+            url: `/conditions/sales-trend/${url}?brand=M&product-cd=${productNum}`,
+          }).then(res =>
+            setConditionData(current => {
+              const newObj = { ...current };
+              newObj[url] = res;
+              return newObj;
+            })
+          );
+          return result;
+        }, {});
+        break;
+      case '주차별':
+        axiosInstance({
+          url: `/conditions/weekly?brand=M&product-cd=${productNum}`,
+        }).then(res => setConditionData(res));
+        break;
+      case '채널별':
+        await eachChannel.reduce(async (promise, url) => {
+          let result = await promise;
+          result = await axiosInstance({
+            url: `/conditions/channel/${url}?brand=M&product-cd=${productNum}`,
+          }).then(res =>
+            setConditionData(current => {
+              const newObj = { ...current };
+              newObj[url] = res;
+              return newObj;
+            })
+          );
+          return result;
+        }, {});
+        break;
+      default:
+    }
+    setCurrentID(id);
+  }
+
+  const btnName = ['매출추이', '주차별', '채널별'];
+
+  useEffect(() => {
+    setProductNum(atomSelectedEachRowNum);
+    setProductName(atomSelectedEachRowName);
+  }, [atomSelectedEachRowNum, atomSelectedEachRowName]);
 
   const CONDITION_RESULTS = {
     매출추이: <ConditionSalesResult />,
     주차별: <ConditionWeeklyResult />,
     채널별: <ConditionChannelsResult />,
-    컬러별: <ConditionColorsResult />,
-    컬러map: <ConditionColorsMapResult />,
   };
 
   return (
     <ConditionContainer>
       <InputContainer>
-        <ProductNum />
-        <ProductName />
+        <ProductNum value={productNum} onChange={handleProductNum} />
+        <ProductName value={productName} onChange={handleProductName} />
       </InputContainer>
       <ConditionBtnContainer>
         {btnName.map((btnItem, idx) => {
@@ -46,6 +115,7 @@ export default function Condition() {
           );
         })}
       </ConditionBtnContainer>
+
       <Content>{CONDITION_RESULTS[currentID]} </Content>
     </ConditionContainer>
   );
@@ -77,6 +147,8 @@ const ProductName = styled.input.attrs({ placeholder: 'ProductName' })`
 
 const ConditionBtnContainer = styled.div`
   display: flex;
+  justify-content: center;
+
   flex-basis: 2%;
   margin-top: 12px;
   gap: 10px;

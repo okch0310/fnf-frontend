@@ -21,6 +21,7 @@ const useMakeQuery = () => {
     'end-date',
     'domains',
     'items',
+    'limit',
   ];
 
   const location = useLocation().pathname;

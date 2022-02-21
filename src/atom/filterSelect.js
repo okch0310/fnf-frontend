@@ -11,7 +11,17 @@ export const filterSelect = atom({
     subcategories: new Set(),
     seasons: new Set(),
     'serial-number': '',
-    ranking: '200',
+    limit: 200,
     'deadline-week': dateConverter(setRecentSunday(new Date())),
   },
+});
+
+export const selectedEachRowNum = atom({
+  key: 'selectedEachRowNum',
+  default: '',
+});
+
+export const selectedEachRowName = atom({
+  key: 'selectedEachRowName',
+  default: '',
 });

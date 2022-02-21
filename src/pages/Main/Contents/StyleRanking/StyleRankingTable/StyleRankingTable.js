@@ -1,4 +1,8 @@
 import React, { useContext } from 'react';
+
+import { styleRankingData } from '../../../../../atom/staticData';
+import { useRecoilValue } from 'recoil';
+
 import { HierarchyContext } from '../StyleRanking';
 
 import styled from 'styled-components';
@@ -8,12 +12,13 @@ import TotalResult from './StyleRankingTableContents/TotalResult';
 
 export default function StyleRankingTable() {
   const { expandCondition } = useContext(HierarchyContext);
+  const atomSRData = useRecoilValue(styleRankingData);
 
   return (
     <RankingTableWrapper expandCondition={expandCondition}>
-      <TopSummary />
-      <SearchResult />
-      <TotalResult />
+      <TopSummary srdata={atomSRData.top20Summary} />
+      <SearchResult srdata={atomSRData.top20List} />
+      <TotalResult srdata={atomSRData.top20TotalSummary} />
     </RankingTableWrapper>
   );
 }
@@ -24,5 +29,4 @@ const RankingTableWrapper = styled.section`
   width: ${props => (props.expandCondition ? '56%' : '75%')};
   flex-basis: ${props => (props.expandCondition ? '56%' : '75%')};
   text-align: center;
-  // flex-basis:56%;
 `;

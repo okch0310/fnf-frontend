@@ -47,3 +47,9 @@ export const STYLERANKING_API = [
   `${BASE_URL}/top20/list`,
   `${BASE_URL}/top20/total-summary`,
 ];
+
+export const STYLERANKING_NAME = [
+  'top20Summary',
+  'top20List',
+  'top20TotalSummary',
+];

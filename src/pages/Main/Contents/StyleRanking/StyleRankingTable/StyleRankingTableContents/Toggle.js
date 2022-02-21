@@ -1,200 +1,56 @@
 import React, { useState } from 'react';
-import 'react-tabulator/lib/styles.css';
-import 'react-tabulator/css/bootstrap/tabulator_bootstrap.min.css'; // use Theme(s)
-
-import { ReactTabulator } from 'react-tabulator';
+import { DataGrid } from '@material-ui/data-grid';
 
 import styled from 'styled-components';
-
-const columns = [
-  {
-    title: 'Name',
-    field: 'name',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-  },
-  {
-    title: 'Age',
-    field: 'age',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-    formatter: 'progress',
-    width: 150,
-  },
-  {
-    title: 'Favourite Color',
-    field: 'color',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-  },
-  {
-    title: 'Date Of Birth',
-    field: 'dob',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-  },
-  {
-    title: 'Rating',
-    field: 'rating',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-    formatter: 'star',
-    width: 150,
-  },
-  {
-    title: 'Passed?',
-    field: 'passed',
-    headerHozAlign: 'center',
-    hozAlign: 'center',
-    formatter: 'tickCross',
-  },
-];
-const data = [
-  {
-    id: 1,
-    name: 'Oli Bob',
-    age: '12',
-    color: 'red',
-    dob: '01/01/1980',
-    rating: 5,
-    passed: true,
-    pets: ['cat', 'dog'],
-  },
-  {
-    id: 2,
-    name: 'Mary May',
-    age: '1',
-    color: 'green',
-    dob: '12/05/1989',
-    rating: 4,
-    passed: true,
-    pets: ['cat'],
-  },
-  {
-    id: 5,
-    name: 'Margret Marmajuke',
-    age: '16',
-    color: 'yellow',
-    dob: '07/01/1999',
-    rating: 4,
-    passed: false,
-  },
-  {
-    id: 6,
-    name: 'Van Ng',
-    age: '37',
-    color: 'green',
-    dob: '06/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog', 'fish'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-  {
-    id: 7,
-    name: 'Duc Ng',
-    age: '37',
-    color: 'yellow',
-    dob: '10/10/1982',
-    rating: 4,
-    passed: true,
-    pets: ['dog'],
-  },
-];
-
-export default function Toggle({ name }) {
+export default function Toggle({ name, srdata }) {
   const [isOpen, setIsOpen] = useState(false);
-
   const handleToggler = e => {
     setIsOpen(!isOpen);
   };
+
+  const columns =
+    name === 'Top20 Summary'
+      ? [
+          { field: '구분', flex: 1 },
+          { field: '판매액', flex: 1, type: 'number' },
+          {
+            field: '매출비중',
+            flex: 1,
+            valueFormatter: params => {
+              const valueFormatted = Number(params.value).toLocaleString();
+              return `${valueFormatted} %`;
+            },
+          },
+          { field: '평균판매가', flex: 1, type: 'number' },
+          { field: '한국판매수', flex: 1, type: 'number' },
+          { field: '재고수량', flex: 1, type: 'number' },
+          { field: '재고주수', flex: 1, type: 'number' },
+        ]
+      : [
+          { field: '판매액', flex: 1, type: 'number' },
+          { field: '판매량', flex: 1, type: 'number' },
+          { field: '실판가', flex: 1, type: 'number' },
+          { field: '국내', flex: 1, type: 'number' },
+          { field: '면세', flex: 1, type: 'number' },
+          { field: 'RF도매', flex: 1, type: 'number' },
+          { field: '물류재고', flex: 1, type: 'number' },
+          { field: '총재고', flex: 1, type: 'number' },
+          { field: '재고주수', flex: 1, type: 'number' },
+        ];
+
   return (
     <ToggleWrapper isOpen={isOpen}>
       <ToggleBtn isOpen={isOpen} onClick={handleToggler}>
         {name}
       </ToggleBtn>
       <TogglePage isOpen={isOpen}>
-        <ReactTabulator data={data} columns={columns} />
+        {srdata && (
+          <DataGrid
+            rows={srdata.data}
+            columns={columns}
+            components={{ Footer: () => '' }}
+          />
+        )}
       </TogglePage>
     </ToggleWrapper>
   );
@@ -228,12 +84,4 @@ const TogglePage = styled.div`
   border: 1px solid;
   border-color: transparent #adadad #adadad transparent;
   overflow: hidden;
-
-  .tabulator {
-    height: 100%;
-    margin: 0;
-    .tabulator-tableholder {
-      overflow: auto;
-    }
-  }
 `;
