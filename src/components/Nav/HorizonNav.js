@@ -168,11 +168,13 @@ const HorizonNav = () => {
               <SerialNum serialNumber="제품명 또는 품번" val="serial-number" />
             </SerialNumContainer>
             <RankingContainer>
+              상위
               <RankingInput
                 numberType="number"
                 defaultValue={200}
                 val="ranking"
               />
+              위
             </RankingContainer>
             <DeadlineWeek />
           </>
@@ -243,7 +245,16 @@ const SerialNumContainer = styled.div`
 `;
 
 const RankingContainer = styled.div`
+  display: flex;
+  align-items: center;
   width: 100px;
+  text-align: center;
+  word-break: keep-all;
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 `;
 
 const RankingInput = styled(SerialNum)``;

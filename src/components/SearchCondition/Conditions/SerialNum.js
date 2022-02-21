@@ -28,6 +28,7 @@ export default function SerialNum({
 }
 
 const SerialInput = styled.input`
+  margin: 0 5px;
   ${props => props.theme.calendarInput};
 
   &::placeholder {
