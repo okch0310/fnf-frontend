@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export default function Toggle() {
   const [isPageOpen, setIsPageOpen] = useState(false);
-  console.log(isPageOpen);
+
   function OpenPage() {
     setIsPageOpen(!isPageOpen);
   }
