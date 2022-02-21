@@ -23,9 +23,24 @@ export const staticData = atom({
   },
 });
 
+export const styleRankingData = atom({
+  key: 'styleRankingData',
+  default: {
+    top20Summary: null,
+    top20List: null,
+    top20TotalSummary: null,
+  },
+});
+
 export const checkedFilters = atom({
   key: 'checkedFilters',
-  default: { category: [], domain: [], item: [], season: [], adult: [] },
+  default: {
+    srSubcategories: [],
+    domains: [],
+    items: [],
+    srSeasons: [],
+    adult: [],
+  },
 });
 
 export const isDataLoaded = atom({

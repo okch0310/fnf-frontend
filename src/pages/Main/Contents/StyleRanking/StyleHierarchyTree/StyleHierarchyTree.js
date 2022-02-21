@@ -13,7 +13,7 @@ import useTreeChecked from '../hook/useTreeChecked';
 export const TreeContext = React.createContext();
 
 export default function StyleHierarchyTree() {
-  const [allTreeData, setAllTreeData] = useState({});
+  const [allTreeData, setAllTreeData] = useState();
   const { isExpand, handleTreeExpand, expandCondition } =
     useContext(HierarchyContext);
 
@@ -29,21 +29,31 @@ export default function StyleHierarchyTree() {
     <TreeWrapper isExpand={expandCondition}>
       <TreeContext.Provider value={{ treeCheckMethods, allTreeData }}>
         <CategoryDomainWrapper isExpand={isExpand}>
-          {isExpand['카테고리'] ? (
-            <CategoryDomain />
-          ) : (
-            <ItemExpand name="카테고리" onClick={handleTreeExpand}>
-              카테고리
-            </ItemExpand>
+          {allTreeData && (
+            <>
+              <CategoryDomain />
+              <ItemExpand
+                name="카테고리"
+                onClick={handleTreeExpand}
+                isExpand={isExpand['카테고리']}
+              >
+                카테고리
+              </ItemExpand>
+            </>
           )}
         </CategoryDomainWrapper>
         <ItemSeasonWrapper isExpand={isExpand}>
-          {isExpand['아이템시즌'] ? (
-            <ItemSeason />
-          ) : (
-            <ItemExpand name="아이템시즌" onClick={handleTreeExpand}>
-              아이템 / 시즌
-            </ItemExpand>
+          {allTreeData && (
+            <>
+              <ItemSeason />
+              <ItemExpand
+                name="아이템시즌"
+                onClick={handleTreeExpand}
+                isExpand={isExpand['아이템시즌']}
+              >
+                아이템 / 시즌
+              </ItemExpand>
+            </>
           )}
         </ItemSeasonWrapper>
       </TreeContext.Provider>
@@ -89,4 +99,5 @@ const ItemExpand = styled.span`
     background-color: #ddd;
   }
   cursor: pointer;
+  visibility: ${props => (!props.isExpand ? 'visible' : 'hidden')};
 `;

@@ -14,7 +14,14 @@ const useMakeQuery = () => {
     'subcategories',
     'seasons',
   ];
-  const styleKeyName = ['serial-number', 'ranking', 'deadline-week'];
+  const styleKeyName = [
+    'seasons',
+    'subcategories',
+    'adult-kids',
+    'end-date',
+    'domains',
+    'items',
+  ];
 
   const location = useLocation().pathname;
 

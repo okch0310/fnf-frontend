@@ -41,3 +41,9 @@ export const DATANAME = [
   'salesSummaryAccSesn',
   'salesWeeklySummary',
 ];
+
+export const STYLERANKING_API = [
+  `${BASE_URL}/top20/summary`,
+  `${BASE_URL}/top20/list`,
+  `${BASE_URL}/top20/total-summary`,
+];

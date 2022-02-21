@@ -20,6 +20,8 @@ import {
   isDataLoaded,
   dataLoadedCount,
   dataLoadedProgress,
+  styleRankingData,
+  checkedFilters,
 } from '../../atom/staticData';
 
 import useMakeQuery from '../../components/Nav/HorizonNavContents/hook/useMakeQuery';
@@ -27,6 +29,7 @@ import {
   FILTERINFO,
   API,
   DATANAME,
+  STYLERANKING_API,
 } from '../Nav/HorizonNavContents/contants/api';
 
 import SerialNum from '../SearchCondition/Conditions/SerialNum';
@@ -37,13 +40,20 @@ const HorizonNav = () => {
   const [filterOptions, setFilterOptions] = useState({});
   const [selectedFilterOptions, setSelectedFilterOptions] =
     useRecoilState(filterSelect);
+  const [checkedSRFilters, setCheckedSRFilters] =
+    useRecoilState(checkedFilters);
+
   const [statData, setStatData] = useRecoilState(staticData);
+  const [atomStyleRankingData, setStyleRankingData] =
+    useRecoilState(styleRankingData);
   const [, setDataLoaded] = useRecoilState(isDataLoaded);
   const [, setDataLoadedCount] = useRecoilState(dataLoadedCount);
   const [isLoading, setIsLoading] = useRecoilState(dataLoadedProgress);
   const { queryString } = useMakeQuery();
 
   const { categories, subcategories, seasons } = selectedFilterOptions;
+  const { srSubcategories, domains, items, srSeasons, adult } =
+    checkedSRFilters;
 
   const location = useLocation().pathname;
 
@@ -53,6 +63,13 @@ const HorizonNav = () => {
     seasons.size !== 0 &&
     isLoading === false;
 
+  const isAllChecked =
+    srSubcategories.length &&
+    domains.length &&
+    items.length &&
+    srSeasons.length &&
+    adult.length;
+  console.log(queryString);
   const showFilter = () => {
     clickBoolean(setShowFilterOptions);
   };
@@ -71,7 +88,11 @@ const HorizonNav = () => {
         ? alert('다른 필터의 선택이 필요한 경우 새로고침 후 진행해주세요.')
         : alert('검색 필터를 모두 선택해주시기 바랍니다.');
     } else {
-      getStatistics();
+      isAllChecked
+        ? getStyleRankingDatas()
+        : isLoading
+        ? alert('다른 필터의 선택이 필요한 경우 새로고침 후 진행해주세요.')
+        : alert('검색 필터를 모두 선택해주시기 바랍니다.');
     }
   };
 
@@ -85,8 +106,41 @@ const HorizonNav = () => {
       return { ...prevState };
     });
   };
+  async function getStyleRankingDatas() {
+    const prevStat = { ...atomStyleRankingData };
 
-  console.log('horizon: ', selectedFilterOptions);
+    setIsLoading(true);
+    setDataLoaded(false);
+    setDataLoadedCount(0);
+
+    // eslint-disable-next-line no-unused-vars
+    const messageObject = await STYLERANKING_API.reduce(
+      async (promise, url, idx) => {
+        // 누산값 받아오기 (2)
+        let result = await promise;
+        // 누산값 변경 (3)
+        result = await axios
+          .get(`${url}?brand=M&adult-kids=성인&${queryString}`)
+          .then(res => {
+            setStatData(prev => {
+              prevStat[DATANAME[idx]] = res.data;
+              return { ...prevStat };
+            });
+            setDataLoadedCount(current => {
+              return current + 1;
+            });
+          })
+          .catch(err => alert(err));
+        // 다음 Promise 리턴
+        return result;
+      },
+      {}
+    ).then(() => {
+      setIsLoading(false);
+      setDataLoaded(true);
+      setDataLoadedCount(0);
+    });
+  }
 
   async function getStatistics() {
     const prevStat = { ...statData };
@@ -165,7 +219,7 @@ const HorizonNav = () => {
           <>
             <SelectButton type="reset" value="초기화" click={resetSelect} />
             <SerialNumContainer>
-              <SerialNum serialNumber="제품명 또는 품번" val="serial-number" />
+              <SerialNum serialNumber="제품명 또는 품번" val="items" />
             </SerialNumContainer>
             <RankingContainer>
               상위

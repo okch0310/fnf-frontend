@@ -21,6 +21,7 @@ export const TreeWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  display: ${props => (props.isExpand ? '' : 'none')};
 `;
 
 export const TreeInnerWrapper = styled.div`

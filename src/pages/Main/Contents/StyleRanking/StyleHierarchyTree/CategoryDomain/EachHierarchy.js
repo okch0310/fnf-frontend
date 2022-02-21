@@ -6,22 +6,22 @@ import useTreeInit from '../hook/useTreeInit';
 import { TreeContext } from '../StyleHierarchyTree';
 
 const TREENAME_KOR = {
-  categories: '카테고리',
+  subcategories: '카테고리',
   domains: '도메인',
   seasons: '시즌',
   items: '아이템',
-  adult_kids: '성인/키즈',
+  'adult-kids': '성인/키즈',
 };
 
 export default function EachHierarchy({ name }) {
   const { allTreeData } = useContext(TreeContext);
 
   const treeName = {
-    categories: allTreeData.categories,
+    subcategories: allTreeData.categories,
     domains: allTreeData.domains,
     seasons: allTreeData.seasons,
     items: allTreeData.items,
-    adult_kids: allTreeData.adult_kids,
+    'adult-kids': allTreeData.adult_kids,
   };
 
   const data = treeName[name];

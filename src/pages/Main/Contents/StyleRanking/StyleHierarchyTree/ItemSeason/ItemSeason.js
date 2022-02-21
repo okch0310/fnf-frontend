@@ -10,9 +10,9 @@ import ItemHierarchy from './ItemHierarchy';
 import SeasonHierarchy from './SeasonHierarchy';
 
 export default function ItemSeason() {
-  const { handleTreeExpand } = useContext(HierarchyContext);
+  const { isExpand, handleTreeExpand } = useContext(HierarchyContext);
   return (
-    <TreeWrapper>
+    <TreeWrapper isExpand={isExpand['아이템시즌']}>
       <HideTree name="아이템시즌" onClick={handleTreeExpand}>
         아이템시즌
       </HideTree>
