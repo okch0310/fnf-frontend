@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { dateConverter } from '../utils/Functions';
+import { dateConverter, setRecentSunday } from '../utils/Functions';
 
 export const filterSelect = atom({
   key: 'filterSelect',
@@ -10,5 +10,8 @@ export const filterSelect = atom({
     categories: '',
     subcategories: new Set(),
     seasons: new Set(),
+    'serial-number': '',
+    ranking: '200',
+    'deadline-week': dateConverter(setRecentSunday(new Date())),
   },
 });

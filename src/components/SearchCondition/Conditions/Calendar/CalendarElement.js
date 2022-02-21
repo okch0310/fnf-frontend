@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale, setDefaultLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
-import { dateConverter } from '../../../../utils/Functions';
+import { dateConverter, setRecentSunday } from '../../../../utils/Functions';
 import { useRecoilState } from 'recoil';
 import { filterSelect } from '../../../../atom/filterSelect';
 
@@ -12,7 +12,7 @@ registerLocale('ko', ko);
 setDefaultLocale('ko');
 
 const CalendarElement = ({ value }) => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(setRecentSunday(new Date()));
   const [selectedFilterOptions, setSelectedFilterOptions] =
     useRecoilState(filterSelect);
 
@@ -33,11 +33,18 @@ const CalendarElement = ({ value }) => {
   }, []);
 
   const changeDate = dateObj => {
-    const prevState = { ...selectedFilterOptions };
-    setSelectedFilterOptions(() => {
+    if (value === 'deadline-week') {
+      const prevState = { ...selectedFilterOptions };
+      setRecentSunday(dateObj);
       prevState[value] = dateConverter(dateObj);
-      return prevState;
-    });
+      setSelectedFilterOptions({ ...prevState });
+    } else {
+      const prevState = { ...selectedFilterOptions };
+      setSelectedFilterOptions(() => {
+        prevState[value] = dateConverter(dateObj);
+        return prevState;
+      });
+    }
   };
 
   return (
@@ -46,8 +53,8 @@ const CalendarElement = ({ value }) => {
       dateFormat="yyyy-MM-dd"
       selected={startDate}
       onChange={date => {
-        setStartDate(date);
         changeDate(date);
+        setStartDate(date);
       }}
     />
   );
