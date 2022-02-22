@@ -29,4 +29,5 @@ const RankingTableWrapper = styled.section`
   width: ${props => (props.expandCondition ? '56%' : '75%')};
   flex-basis: ${props => (props.expandCondition ? '56%' : '75%')};
   text-align: center;
+  padding-left: 1%;
 `;

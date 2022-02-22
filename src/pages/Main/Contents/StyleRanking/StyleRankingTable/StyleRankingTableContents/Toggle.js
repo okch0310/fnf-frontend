@@ -74,8 +74,7 @@ const ToggleBtn = styled.div`
   position: sticky;
   top: 0;
   flex-basis: ${props => (props.isOpen ? '15%' : '100%')};
-  border: 1px solid;
-  border-color: #adadad #adadad #adadad transparent;
+  border: 1px solid #adadad;
   background-color: ${props => (props.isOpen ? '#ccc' : '#ddd')};
   font-weight: ${props => (props.isOpen ? '700' : '400')};
   cursor: pointer;

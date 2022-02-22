@@ -103,4 +103,6 @@ const PieChartContainer = styled.div`
   flex-basis: 30%;
   height: 30%;
   background-color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;

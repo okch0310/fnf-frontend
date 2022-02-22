@@ -94,4 +94,6 @@ const DomesticChart = styled.div`
   flex-basis: 35%;
   height: 35%;
   background-color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;

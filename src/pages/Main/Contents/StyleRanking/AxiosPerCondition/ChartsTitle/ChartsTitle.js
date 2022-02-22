@@ -5,6 +5,9 @@ export default function ChartsTitle({ title }) {
 }
 
 const Title = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 2;
   display: flex;
   width: 100%;
   justify-content: center;
