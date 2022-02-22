@@ -61,7 +61,11 @@ export default function SearchResult({ srdata }) {
                 field: '이미지',
                 renderCell: params => {
                   return (
-                    <img src={params.formattedValue} alt={params} width="50" />
+                    <img
+                      src={params.formattedValue}
+                      alt={params.row.대표품번}
+                      width="50"
+                    />
                   );
                 },
                 width: 120,

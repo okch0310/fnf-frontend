@@ -174,12 +174,12 @@ const ConditionBtn = styled.button`
   padding: 5px 10px;
   border-radius: 4px;
   font-size: 14px;
-  font-weight: 500;
+
   ${props => {
     const isBtnClicked = props.currentID === props.btnItem;
     return isBtnClicked
-      ? `background-color:${props.pointColors.blue}; color:white;`
-      : 'background-color:white;';
+      ? `background-color:${props.pointColors.blue}; color:white; font-weight:700;`
+      : 'background-color:white; font-weight: 500;';
   }}
 
   &:hover {
