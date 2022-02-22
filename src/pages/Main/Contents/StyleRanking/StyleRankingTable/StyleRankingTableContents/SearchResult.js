@@ -22,7 +22,7 @@ export default function SearchResult({ srdata }) {
 
   return (
     <SearchResultWrapper>
-      <SearchResultHeader>선택된 필터별 실적</SearchResultHeader>
+      <SearchResultHeader>선택된 필터별 요약</SearchResultHeader>
       <TableWrapper>
         {srdata && (
           <DataGrid
@@ -157,12 +157,15 @@ export default function SearchResult({ srdata }) {
 }
 
 const SearchResultWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
   background-color: #fff;
   overflow: hidden;
 `;
 
 const TableWrapper = styled.div`
+  flex-grow: 1;
   height: 95%;
   border: 1px solid;
   border-color: transparent #adadad #adadad transparent;

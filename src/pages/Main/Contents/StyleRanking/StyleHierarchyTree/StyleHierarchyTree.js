@@ -29,7 +29,7 @@ export default function StyleHierarchyTree() {
     <TreeWrapper isExpand={expandCondition}>
       <TreeContext.Provider value={{ treeCheckMethods, allTreeData }}>
         <CategoryDomainWrapper isExpand={isExpand}>
-          {allTreeData && (
+          {allTreeData ? (
             <>
               <CategoryDomain />
               <ItemExpand
@@ -40,10 +40,12 @@ export default function StyleHierarchyTree() {
                 카테고리
               </ItemExpand>
             </>
+          ) : (
+            <SkeletonExpand>카테고리</SkeletonExpand>
           )}
         </CategoryDomainWrapper>
         <ItemSeasonWrapper isExpand={isExpand}>
-          {allTreeData && (
+          {allTreeData ? (
             <>
               <ItemSeason />
               <ItemExpand
@@ -54,6 +56,8 @@ export default function StyleHierarchyTree() {
                 아이템 / 시즌
               </ItemExpand>
             </>
+          ) : (
+            <SkeletonExpand>아이템 / 시즌</SkeletonExpand>
           )}
         </ItemSeasonWrapper>
       </TreeContext.Provider>
@@ -100,4 +104,10 @@ const ItemExpand = styled.span`
   }
   cursor: pointer;
   visibility: ${props => (!props.isExpand ? 'visible' : 'hidden')};
+`;
+
+const SkeletonExpand = styled.span`
+  writing-mode: vertical-lr;
+  height: 100%;
+  padding: 4px;
 `;
