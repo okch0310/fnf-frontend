@@ -103,6 +103,7 @@ const HorizonNav = () => {
       const prevState = { ...prev };
 
       prevState[`serial-number`] = '';
+      prevState.search_keyword = '';
       prevState.limit = 200;
 
       return { ...prevState };
@@ -188,15 +189,6 @@ const HorizonNav = () => {
       setDataLoadedCount(0);
     });
   }
-
-  const handleLimit = e => {
-    setSelectedFilterOptions(current => {
-      const newObj = { ...current };
-      newObj[e.target.val] = e.target.value;
-      return newObj;
-    });
-  };
-
   return (
     <NavContainer>
       <NavExpBtnContainer
@@ -241,7 +233,11 @@ const HorizonNav = () => {
           <>
             <SelectButton type="reset" value="초기화" click={resetSelect} />
             <SerialNumContainer>
-              <SerialNum serialNumber="제품명 또는 품번" val="items" />
+              <SerialNum
+                serialNumber="제품명 또는 품번"
+                defaultValue=""
+                val="search_keyword"
+              />
             </SerialNumContainer>
             <RankingContainer>
               상위
@@ -249,7 +245,6 @@ const HorizonNav = () => {
                 numberType="number"
                 defaultValue={200}
                 val="limit"
-                onChange={handleLimit}
               />
               위
             </RankingContainer>

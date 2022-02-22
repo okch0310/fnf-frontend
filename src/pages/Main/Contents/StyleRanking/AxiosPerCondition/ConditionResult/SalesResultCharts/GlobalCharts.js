@@ -103,5 +103,6 @@ export default function GlobalCharts() {
 const DomesticChart = styled.div`
   width: 100%;
   flex-basis: 35%;
+  height: 35%;
   background-color: white;
 `;

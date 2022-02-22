@@ -24,7 +24,11 @@ export default function ChannelTables() {
   const atomConditionData = useRecoilValue(conditionData);
 
   useEffect(() => {
-    if (atomConditionData) {
+    if (
+      atomConditionData !== false &&
+      atomConditionData !== undefined &&
+      atomConditionData.overall !== undefined
+    ) {
       setTableData(atomConditionData.overall.data);
     }
   }, [atomConditionData]);

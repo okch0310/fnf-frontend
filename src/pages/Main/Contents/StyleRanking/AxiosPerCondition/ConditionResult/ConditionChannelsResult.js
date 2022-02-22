@@ -15,8 +15,8 @@ export default function ConditionChannelsResult() {
 const ChannelContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 21vw;
-  height: 98%;
+  width: 20vw;
+  height: 90%;
   margin-top: 12px;
   gap: 5px;
 `;

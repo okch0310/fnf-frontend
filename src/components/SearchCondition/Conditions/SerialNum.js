@@ -13,7 +13,7 @@ export default function SerialNum({
 
   return (
     <SerialInput
-      value={val === 'items' ? '' : selectedFilter[val]}
+      value={selectedFilter[val]}
       placeholder={serialNumber}
       type={numberType}
       defaultValue={defaultValue}

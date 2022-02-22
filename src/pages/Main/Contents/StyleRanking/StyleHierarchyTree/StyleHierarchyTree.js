@@ -57,7 +57,7 @@ export default function StyleHierarchyTree() {
               </ItemExpand>
             </>
           ) : (
-            <SkeletonExpand>아이템 / 시즌</SkeletonExpand>
+            <SkeletonExpand>아이템 / 시즌n</SkeletonExpand>
           )}
         </ItemSeasonWrapper>
       </TreeContext.Provider>

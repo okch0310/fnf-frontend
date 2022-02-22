@@ -22,6 +22,7 @@ const useMakeQuery = () => {
     'domains',
     'items',
     'limit',
+    'search_keyword',
   ];
 
   const location = useLocation().pathname;

@@ -23,7 +23,7 @@ export const ConditionContext = React.createContext();
 export default function Condition() {
   const themeContext = useContext(ThemeContext);
 
-  const [currentID, setCurrentID] = useState(1);
+  const [currentID, setCurrentID] = useState('매출추이');
 
   const atomSelectedEachRowNum = useRecoilValue(selectedEachRowNum);
   const atomSelectedEachRowName = useRecoilValue(selectedEachRowName);
@@ -40,7 +40,13 @@ export default function Condition() {
     setProductName(e.target.value);
   };
 
-  async function clickHandler(id) {
+  const isProductSelected = productNum !== '' && productName !== '';
+
+  const clickHandler = id => {
+    setCurrentID(id);
+  };
+
+  async function getData(id) {
     switch (id) {
       case '매출추이':
         await salesTrendEndPoints.reduce(async (promise, url) => {
@@ -79,7 +85,6 @@ export default function Condition() {
         break;
       default:
     }
-    setCurrentID(id);
   }
 
   const btnName = ['매출추이', '주차별', '채널별'];
@@ -88,6 +93,11 @@ export default function Condition() {
     setProductNum(atomSelectedEachRowNum);
     setProductName(atomSelectedEachRowName);
   }, [atomSelectedEachRowNum, atomSelectedEachRowName]);
+
+  useEffect(() => {
+    isProductSelected && getData(currentID);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productNum, currentID]);
 
   const CONDITION_RESULTS = {
     매출추이: <ConditionSalesResult />,
@@ -98,8 +108,12 @@ export default function Condition() {
   return (
     <ConditionContainer>
       <InputContainer>
-        <ProductNum value={productNum} onChange={handleProductNum} />
-        <ProductName value={productName} onChange={handleProductName} />
+        <ProductNum value={productNum} onChange={handleProductNum} readOnly />
+        <ProductName
+          value={productName}
+          onChange={handleProductName}
+          readOnly
+        />
       </InputContainer>
       <ConditionBtnContainer>
         {btnName.map((btnItem, idx) => {
@@ -107,6 +121,8 @@ export default function Condition() {
             <ConditionBtn
               key={btnItem + idx}
               onClick={() => clickHandler(btnItem)}
+              btnItem={btnItem}
+              currentID={currentID}
               pointColors={themeContext.pointColors}
               monoColors={themeContext.monoColors}
             >
@@ -159,7 +175,12 @@ const ConditionBtn = styled.button`
   border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
-  background-color: white;
+  ${props => {
+    const isBtnClicked = props.currentID === props.btnItem;
+    return isBtnClicked
+      ? `background-color:${props.pointColors.blue}; color:white;`
+      : 'background-color:white;';
+  }}
 
   &:hover {
     background-color: ${props => props.pointColors.blue};

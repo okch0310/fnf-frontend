@@ -11,11 +11,12 @@ export default function Toggle({ name, srdata }) {
   const columns =
     name === 'Top20 Summary'
       ? [
-          { field: '구분', flex: 1 },
+          { field: '구분', flex: 1, headerAlign: 'left', align: 'left' },
           { field: '판매액', flex: 1, type: 'number' },
           {
             field: '매출비중',
             flex: 1,
+            type: 'number',
             valueFormatter: params => {
               const valueFormatted = Number(params.value).toLocaleString();
               return `${valueFormatted} %`;
@@ -49,6 +50,8 @@ export default function Toggle({ name, srdata }) {
             rows={srdata.data}
             columns={columns}
             components={{ Footer: () => '' }}
+            rowHeight={24}
+            scrollbarSize={17}
           />
         )}
       </TogglePage>

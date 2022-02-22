@@ -50,7 +50,11 @@ export default function DomesticPieCharts() {
   const atomConditionData = useRecoilValue(conditionData);
 
   useEffect(() => {
-    if (atomConditionData !== false && atomConditionData.ratio !== undefined) {
+    if (
+      atomConditionData !== false &&
+      atomConditionData !== undefined &&
+      atomConditionData.ratio !== undefined
+    ) {
       setPieData(atomConditionData.ratio.data);
     }
   }, [atomConditionData]);
@@ -97,5 +101,6 @@ export default function DomesticPieCharts() {
 const PieChartContainer = styled.div`
   width: 100%;
   flex-basis: 30%;
+  height: 30%;
   background-color: white;
 `;

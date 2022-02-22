@@ -24,7 +24,11 @@ export default function CodeTables() {
   const atomConditionData = useRecoilValue(conditionData);
 
   useEffect(() => {
-    if (atomConditionData) {
+    if (
+      atomConditionData !== false &&
+      atomConditionData !== undefined &&
+      atomConditionData.shops !== undefined
+    ) {
       setTableData(atomConditionData.shops.data);
     }
   }, [atomConditionData]);

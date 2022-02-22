@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { LineChart, Line } from 'recharts';
+
 import {
   selectedEachRowNum,
   selectedEachRowName,
@@ -31,8 +33,9 @@ export default function SearchResult({ srdata }) {
             columns={[
               {
                 field: '랭킹',
-
                 width: 120,
+
+                align: 'center',
               },
               {
                 field: '상승',
@@ -62,6 +65,7 @@ export default function SearchResult({ srdata }) {
                   );
                 },
                 width: 120,
+                align: 'center',
               },
               {
                 field: '택가',
@@ -71,6 +75,11 @@ export default function SearchResult({ srdata }) {
               {
                 field: '할인율',
                 width: 120,
+                type: 'number',
+                valueFormatter: params => {
+                  const valueFormatted = Number(params.value).toLocaleString();
+                  return `${valueFormatted} %`;
+                },
               },
               {
                 field: '제품명',
@@ -79,6 +88,28 @@ export default function SearchResult({ srdata }) {
               {
                 field: '추이',
                 width: 120,
+                renderCell: params => {
+                  const paramArray = params.formattedValue.split(',');
+                  const convertedParamArray = paramArray.map(item => {
+                    const newObj = {};
+                    newObj.x = Number(item);
+                    return newObj;
+                  });
+                  return (
+                    <LineChart
+                      data={convertedParamArray}
+                      width={100}
+                      height={50}
+                    >
+                      <Line
+                        type="monotone"
+                        dataKey="x"
+                        stroke="blue"
+                        dot={false}
+                      />
+                    </LineChart>
+                  );
+                },
               },
               {
                 field: '수량',
@@ -145,7 +176,7 @@ export default function SearchResult({ srdata }) {
                 },
               },
             ]}
-            components={{ Toolbar: GridToolbar, Footer: () => '' }}
+            components={{ Toolbar: GridToolbar }}
             onRowClick={(params, event) => {
               !event.ignore && handleSelectedRow(params);
             }}
@@ -165,11 +196,34 @@ const SearchResultWrapper = styled.div`
 `;
 
 const TableWrapper = styled.div`
-  flex-grow: 1;
   height: 95%;
   border: 1px solid;
   border-color: transparent #adadad #adadad transparent;
   overflow: hidden;
+
+  .MuiDataGrid-columnHeaderDraggableContainer {
+    .MuiDataGrid-columnHeaderTitle {
+      text-overflow: inherit;
+    }
+    .MuiDataGrid-iconButtonContainer {
+      display: none;
+    }
+    .MuiDataGrid-menuIconButton {
+      display: none;
+    }
+
+    &:hover {
+      .MuiDataGrid-columnHeaderTitle {
+        text-overflow: ellipsis;
+      }
+      .MuiDataGrid-iconButtonContainer {
+        display: inherit;
+      }
+      .MuiDataGrid-menuIconButton {
+        display: inherit;
+      }
+    }
+  }
 `;
 
 const SearchResultHeader = styled.div`

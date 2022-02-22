@@ -13,6 +13,7 @@ export const filterSelect = atom({
     'serial-number': '',
     limit: 200,
     'deadline-week': dateConverter(setRecentSunday(new Date())),
+    search_keyword: '',
   },
 });
 

@@ -15,6 +15,6 @@ const Title = styled.div`
   font-weight: 800;
   color: white;
   background-color: #377ef9;
-  border-radius: 5px 5px 0 0;
+  border-radius: 4px 4px 0 0;
   /* height: 5.2vh; */
 `;

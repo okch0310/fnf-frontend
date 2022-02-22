@@ -106,8 +106,8 @@ export default function ConditionWeeklyResult() {
 
 const WeeklyContainer = styled.div`
   flex: 1;
-  height: 98%;
-  width: 21vw;
+  height: 90%;
+  width: 20vw;
   margin-top: 12px;
   border-radius: 4px;
   word-break: keep-all;
