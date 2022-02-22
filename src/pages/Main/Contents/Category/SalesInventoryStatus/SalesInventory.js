@@ -10,7 +10,7 @@ import { staticData } from '../../../../../atom/staticData';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 export default function SalesInventory() {
-  const [atomStaticData, setAtomStaticData] = useRecoilState(staticData);
+  const [atomStaticData] = useRecoilState(staticData);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenTwo, setIsOpenTwo] = useState(false);
   const [isOpenThree, setIsOpenThree] = useState(false);
