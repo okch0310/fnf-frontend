@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { filterSelect } from '../../../../atom/filterSelect';
@@ -76,6 +76,7 @@ const useMakeQuery = () => {
     setQueryString(prev => {
       return containerArr.join('&');
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilterOptions]);
 
   return { queryString, setQueryString };

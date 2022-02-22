@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import {
-  clickBoolean,
-  dateConverter,
-  setRecentSunday,
-} from '../../utils/Functions';
+import { clickBoolean } from '../../utils/Functions';
 import { HorizonNavTri } from '../../styles/icons';
 import ChartRange from '../SearchCondition/Conditions/ChartRange';
 import WeeklyPerformance from '../SearchCondition/Conditions/WeeklyPerformance';
@@ -26,7 +22,6 @@ import {
   dataLoadedProgress,
   styleRankingData,
   conditionData,
-  checkedFilters,
 } from '../../atom/staticData';
 
 import useMakeQuery from '../../components/Nav/HorizonNavContents/hook/useMakeQuery';

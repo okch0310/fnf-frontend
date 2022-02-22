@@ -16,7 +16,6 @@ export default function SerialNum({
       value={selectedFilter[val]}
       placeholder={serialNumber}
       type={numberType}
-      defaultValue={defaultValue}
       onChange={e => {
         const prevState = { ...selectedFilter };
 
