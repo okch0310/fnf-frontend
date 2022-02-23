@@ -51,11 +51,7 @@ const CalendarElement = ({ value }) => {
     <DateInput
       tabIndex={0}
       dateFormat="yyyy-MM-dd"
-      selected={
-        value === 'deadline-week'
-          ? startDate
-          : selectedFilterOptions['deadline-week']
-      }
+      selected={startDate}
       onChange={date => {
         changeDate(date);
         setStartDate(date);
