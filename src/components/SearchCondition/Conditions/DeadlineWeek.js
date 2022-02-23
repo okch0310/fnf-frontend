@@ -5,7 +5,7 @@ import CalendarElement from './Calendar/CalendarElement';
 export default function DeadlineWeek() {
   return (
     <CalendarBlock>
-      <CalendarElement value="end-date" />
+      <CalendarElement value="deadline-week" />
     </CalendarBlock>
   );
 }

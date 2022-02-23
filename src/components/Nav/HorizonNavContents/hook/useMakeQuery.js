@@ -18,7 +18,7 @@ const useMakeQuery = () => {
     'seasons',
     'subcategories',
     'adult-kids',
-    'end-date',
+    'deadline-week',
     'domains',
     'items',
     'limit',
@@ -68,8 +68,11 @@ const useMakeQuery = () => {
       }
     } else {
       for (let key of styleKeyName) {
-        selectedObj[key] !== '' &&
-          containerArr.push(`${key}=${selectedObj[key]}`);
+        key === 'deadline-week'
+          ? selectedObj[key] !== '' &&
+            containerArr.push(`end-date=${selectedObj[key]}`)
+          : selectedObj[key] !== '' &&
+            containerArr.push(`${key}=${selectedObj[key]}`);
       }
     }
 
