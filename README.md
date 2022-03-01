@@ -20,20 +20,95 @@
 * Collabo Tools : Slack, Notion, Figma
 * <details>
   <summary>Used Packages</summary> 
-  　　- State : Recoil <br/>
-  　　- Request : Axios <br/>
-  　　- Utils : Date-fns <br/>
-  <br/>
-  <details><summary>View Tools</summary>
-  　　- React-checkbox-tree <br/>
-  　　- React-custom-scrollbars <br/>
-  　　- React-datepicker <br/>
-  　　- React-icons <br/>
-  　　- React-modal <br/>
-  　　- Recharts <br/>
-  　　- Material-ui :: core, data-grid <br/>
+  
+  ```
+  - State : Recoil 
+  - Request : Axios 
+  - Utils : Date-fns 
+  ```
+  <details>
+    <summary>View Tools</summary>
+    
+    ```
+    - React-checkbox-tree 
+    - React-custom-scrollbars 
+    - React-datepicker 
+    - React-icons 
+    - React-modal 
+    - Recharts 
+    - Material-ui
+      - core
+      - data-grid
+    ```
   </details>
     
   </details>
 
+### R&R per members
 
+* <details>
+  <summary>김정현</summary>
+
+  ```
+    - 공통
+        1. 개발 환경 셋업
+        2. 라이브러리 가이드
+        3. 라이브러리 예제 구현 
+        4. 컴포넌트 설계 구조 검토 및 리팩토링
+        5. 메인 리뷰어
+        6. 각 팀원 백업
+    - 카테고리 페이지
+        1. All(요약) 페이지
+        2. 사이드 바
+    - 스타일 랭킹 페이지
+        1. Tree View 구현
+            1. react-checkbox-tree 사용
+        2. 트리 쿼리 등, API 통신 구성
+            1. axios instance with reduce + async await
+        3. 중간 상위 N위 지표 테이블 구현
+            1. @material-ui / data-grid 사용
+  ```
+</details>
+
+* <details>
+  <summary>윤종호</summary>
+  
+  ```
+    - 공통
+        1. 초기세팅
+    - 카테고리 페이지
+        1. 판매 / 유통 데이터 페이지
+        2. 상단 데이터 필터 바
+    - 스타일랭킹 페이지
+        1. 상단 데이터 필터 바
+        2. 트리 쿼리 구성
+  ```
+</details>
+
+* <details>
+  <summary>이석호</summary>
+  
+  ```
+    - 공통
+        1. 스타일 가이드 공유 및 가이드
+    - 카테고리 페이지
+        1. 검색 데이터 페이지
+        2. Button Component
+    - 스타일랭킹 페이지
+        1. 각 아이템 별 조건부 지표
+  ```
+</details>
+
+* <details>
+  <summary>옥채현</summary>
+  
+  ```
+    - 공통
+        1. 카드 컴포넌트
+        2. 모달 컴포넌트
+    - 카테고리 페이지
+        1. 주간실적 페이지
+    - 스타일랭킹 페이지
+        1. 필터 검색 결과 테이블
+  ```
+</details>
