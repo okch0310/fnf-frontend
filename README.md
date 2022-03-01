@@ -2,16 +2,14 @@
 
 ## Wecode 기업협업 프로젝트
 
-## Member
+### Members
 
 - [김정현](https://github.com/KimJeongHyun)   
 - [윤종호](https://github.com/myway8907)
 - [이석호](https://github.com/Seokho0120)
 - [옥채현](https://github.com/okch0310)
 
----
-
-### Tech Stacks
+## Tech Stacks
 
 * View : React v17, React-Router-Dom, Styled-components
 * Build : Create-React-App
@@ -44,7 +42,7 @@
     
   </details>
 
-### R&R per members
+## R&R
 
 * <details>
   <summary>김정현</summary>
@@ -112,3 +110,8 @@
         1. 필터 검색 결과 테이블
   ```
 </details>
+
+## R&R per members (김정현)
+
+이 영역에서 각자 했던 영역의 리소스 및 사용한 기술, 했던 역할 등등을 상세히 기술하시면 됩니다.
+
