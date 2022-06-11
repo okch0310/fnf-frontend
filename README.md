@@ -1,6 +1,5 @@
-# F&F Dashboard Project
+# F&F 사내 MLB 판매 데이터 관련 Dashboard Project
 
-## Wecode 기업협업 프로젝트
 
 ### Members
 
